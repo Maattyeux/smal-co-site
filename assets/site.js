@@ -153,3 +153,15 @@
   // erreurs survenues avant l'exécution du script (chargé en defer)
   Array.prototype.forEach.call(document.images, function (img) { if (img.complete && !img.naturalWidth && img.getAttribute('src')) swap(img); });
 })();
+
+// contact.html?objet=Partenariat+Cyclisme : présélectionne le motif (liens des offres partenaires), puis guide l'œil vers le champ
+(function () {
+  var sel = document.getElementById('contact-subject');
+  var q = new URLSearchParams(location.search).get('objet') || new URLSearchParams(location.search).get('subject');
+  if (!sel || !q) return;
+  var opt = Array.prototype.find.call(sel.options, function (o) { return o.value.toLowerCase() === q.trim().toLowerCase(); });
+  if (!opt) return; // valeur inconnue dans l'URL : on laisse le choix par défaut
+  sel.value = opt.value;
+  sel.classList.add('is-prefilled');
+  sel.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+})();

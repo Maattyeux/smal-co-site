@@ -608,7 +608,8 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan,.ribbon li{font-family:var
 .partners-offers-section{padding:5rem 1.5rem;background:radial-gradient(circle at 50% 20%,rgba(168,85,247,.12) 0%,transparent 60%);perspective:1000px}
 .partners-container{max-width:1200px;margin:0 auto}
 .partners-header{text-align:center;max-width:780px;margin:0 auto 3.5rem}
-.partners-main-title{font-family:var(--impact);font-size:clamp(2rem,4vw,3.2rem);letter-spacing:.5px;margin:1rem 0;color:#fff}
+.partners-main-title{font-family:var(--impact);font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;letter-spacing:.5px;margin:1rem 0;color:#fff}
+.nowrap{white-space:nowrap}
 .partners-intro{color:#d1d5db;font-size:1.05rem;line-height:1.6}
 /* min(310px,100%) : pas de débordement horizontal sous 360px de large */
 .offers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(310px,100%),1fr));gap:2rem;align-items:stretch}
@@ -634,3 +635,5 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan,.ribbon li{font-family:var
 .btn-gold{background:linear-gradient(135deg,#f59e0b,#eab308);color:#0b0c10;box-shadow:0 8px 24px rgba(234,179,8,.35)}
 .btn-gold:hover{background:linear-gradient(135deg,#fbbf24,#f59e0b);transform:translateY(-2px);box-shadow:0 12px 30px rgba(234,179,8,.5)}
 @media (prefers-reduced-motion:reduce){.offer-card:hover,.card-featured:hover,.btn-gold:hover{transform:none}}
+/* Contact : motif présélectionné depuis une offre partenaire (site.js) */
+.form select.is-prefilled{border-color:#a855f7;box-shadow:0 0 15px rgba(168,85,247,.4)}

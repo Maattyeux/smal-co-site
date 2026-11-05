@@ -141,7 +141,7 @@ h1,h2,h3,p{margin:0}
 
 /* Têtes de page */
 .phead{padding:clamp(150px,20vw,230px) 0 clamp(30px,5vw,60px);background:radial-gradient(900px 420px at 85% 0%,rgba(68,10,116,.6),transparent 70%)}
-.phead .lead{margin-top:26px}
+.phead .lead{margin-top:26px;max-width:60ch} /* intro de page en 3 lignes max sur grand écran */
 .band{height:clamp(240px,48vw,560px);overflow:hidden;border-block:1px solid var(--line)}
 .band img{width:100%;height:100%;object-fit:cover}
 

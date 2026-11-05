@@ -155,12 +155,12 @@
   });
 })();
 
-// survol à la souris : spotlight (--mouse-x/y) sur les cartes équipe, inclinaison ±4° (--rx/--ry) sur les visuels
+// survol à la souris : inclinaison ±4° (--rx/--ry) sur les visuels de la page Communication
 (function () {
   if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches || document.body.classList.contains('low-bandwidth');
-  document.querySelectorAll('.founders li, .bento-card, .crossfade-image-box').forEach(function (el) {
-    var tilt = !still && !el.matches('.founders li');
+  document.querySelectorAll('.bento-card, .crossfade-image-box').forEach(function (el) {
+    var tilt = !still;
     el.addEventListener('mousemove', function (e) {
       var r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
       el.style.setProperty('--mouse-x', x + 'px');

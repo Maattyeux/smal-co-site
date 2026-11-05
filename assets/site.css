@@ -136,12 +136,7 @@ h1,h2,h3,p{margin:0}
 .timeline small{margin-left:12px;font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;border:1px solid var(--violet-3);color:var(--violet-3);border-radius:999px;vertical-align:middle}
 
 /* Fondateurs */
-.founders{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.founders li{padding:28px;border:1px solid var(--line);border-radius:22px;background:var(--panel)}
-.founders h3{font:700 20px/1.2 var(--display)}
 .role{color:var(--violet-3);font-weight:600;margin-top:4px}
-.founders .muted{font-size:14px;margin-top:10px}
-.founders .age{color:#9ca3af;font-size:.9rem;margin-top:6px} /* âge discret sous le rôle (fondateurs, qui-sommes-nous) */
 
 /* Pages équipes */
 .cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start}
@@ -208,14 +203,14 @@ h1,h2,h3,p{margin:0}
   .partners,.ways{grid-template-columns:1fr}
   .nums{grid-template-columns:repeat(2,1fr)}
   .values{grid-template-columns:repeat(2,1fr)}
-  .founders,.uses{grid-template-columns:repeat(2,1fr)}
+  .uses{grid-template-columns:repeat(2,1fr)}
   .cols{grid-template-columns:1fr}
   .mosaic{grid-template-columns:repeat(2,1fr)}
   .foot-in{grid-template-columns:1fr 1fr}
 }
 @media (max-width:560px){
   body{font-size:16px}
-  .values,.founders,.uses{grid-template-columns:1fr}
+  .values,.uses{grid-template-columns:1fr}
   .foot-in{grid-template-columns:1fr}
   .nums{gap:24px}
 }
@@ -344,12 +339,6 @@ section[id]{scroll-margin-top:72px}
 @media (max-width:980px){.list-cards>li{flex-basis:calc((100% - 20px)/2)}}
 @media (max-width:560px){.list-cards>li{flex-basis:100%}}
 /* qui-sommes-nous */
-.profiles li{display:flex;flex-direction:column}
-.profiles blockquote{margin:auto 0 0;padding-top:18px;color:var(--gold);font:600 16px/1.4 var(--display)}
-.profiles .todo{align-self:flex-start;margin-top:auto}
-.profiles-3{grid-template-columns:repeat(3,1fr);margin-top:32px}
-@media (max-width:980px){.profiles-3{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:560px){.profiles-3{grid-template-columns:1fr}}
 /* hero logo + scroll */
 .hero-logo{align-items:center;text-align:center}
 .hero-logo .hero-shade{background:radial-gradient(900px 520px at 50% 55%,rgba(68,10,116,.55),transparent 70%),linear-gradient(180deg,rgba(17,18,21,.45),rgba(17,18,21,0) 40%)} /* juste de quoi lire le menu ; l'assombrissement global vient de .hero-veil */
@@ -368,10 +357,6 @@ body:has(.hero-logo,.backdrop) .foot{position:relative;z-index:1}
 .hero-logo .hero-lead{margin-inline:auto;max-width:58ch}
 .hero-logo .cta-row{justify-content:center}
 .step-logo img,.step-logo img:only-child{object-fit:contain;padding:12%;background:radial-gradient(400px 220px at 50% 40%,rgba(122,62,224,.3),transparent 70%),var(--panel)}
-.member-photo-wrap{position:relative;width:100%;aspect-ratio:3/4;border-radius:.85rem;overflow:hidden;margin-bottom:1.25rem;background-color:var(--panel);border:1px solid rgba(255,255,255,.08)}
-.member-photo{width:100%;height:100%;object-fit:cover;object-position:center 15%;transform:scale(1.12);display:block;transition:transform .45s cubic-bezier(.16,1,.3,1)}
-.founders li:hover .member-photo{transform:scale(1.18)}
-.member-photo-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(17,18,22,.6) 0%,transparent 35%);pointer-events:none}
 
 /* co-branding FFC (logos/ffc.png à déposer ; repli texte sinon) */
 .cobrand{background:linear-gradient(150deg,#2a1257,#120826 70%)}
@@ -477,7 +462,7 @@ body:has(.hero-logo,.backdrop) .foot{position:relative;z-index:1}
 @keyframes bounce-left{0%,100%{transform:translate(0,-50%);opacity:.7}50%{transform:translate(-6px,-50%);opacity:1}}
 
 /* Rythme typo commun aux titres de cartes */
-.values h3,.founders h3,.uses h3,.support .ways h3,.list-cards h3{font:700 clamp(19px,1.6vw,22px)/1.2 var(--display);letter-spacing:-.01em}
+.values h3,.uses h3,.support .ways h3,.list-cards h3{font:700 clamp(19px,1.6vw,22px)/1.2 var(--display);letter-spacing:-.01em}
 
 /* Crédits photos (footer) */
 .footer-copyright-section{margin:22px 0 26px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;line-height:1.6;color:var(--muted)}
@@ -523,14 +508,11 @@ body:has(.hero-logo,.backdrop) .foot{position:relative;z-index:1}
 
 /* DA lumineuse : halos doux, élévation légère, liséré sur les photos */
 body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 80% 20%,rgba(168,85,247,.08),transparent 40%),radial-gradient(circle at 20% 70%,rgba(99,102,241,.06),transparent 50%)}
-.card,.event,.list-cards li,.partners li,.founders li,.uses li,.status-card{box-shadow:var(--lift)}
+.card,.event,.list-cards li,.partners li,.uses li,.status-card{box-shadow:var(--lift)}
 .card .eyebrow,.event .eyebrow{color:var(--violet-3)} /* #a855f7 < 4.5:1 sur --panel */
 .gal-track figure,.gallery-img,.bottom-gallery-img,.insta-preview-img,.etape-main-poster,.step-pics img{border:1px solid rgba(255,255,255,.1)}
 
 /* Micro-interactions : spotlight sur les cartes équipe, inclinaison 3D (variables posées par site.js) */
-.founders li{position:relative;isolation:isolate}
-.founders li::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:radial-gradient(400px circle at var(--mouse-x,50%) var(--mouse-y,50%),rgba(168,85,247,.12),transparent 80%);opacity:0;transition:opacity .4s ease}
-.founders li:hover::before{opacity:1}
 .action-bento-grid,.crossfade-sticky-container{perspective:1000px}
 .bento-card,.crossfade-image-box{transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.16,1,.3,1)}
 .is-tilting{transition-duration:.12s}
@@ -552,7 +534,6 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 body.nav-locked{overflow:hidden}
 /* Connexion lente ou économie de données (classe posée par site.js) : animations, tilt et lueurs coupés */
 .low-bandwidth *,.low-bandwidth *::before,.low-bandwidth *::after{animation:none!important;transition:none!important}
-.low-bandwidth .founders li::before{display:none}
 /* Image introuvable : remplacée par ce bloc monogramme (site.js) */
 div.img-fallback{display:grid;place-items:center;width:100%;min-height:120px;background:radial-gradient(circle at 50% 40%,rgba(122,62,224,.18),transparent 70%),var(--panel);color:rgba(255,255,255,.4);font:800 clamp(14px,2.2vw,24px)/1 var(--display);letter-spacing:.08em;text-align:center}
 
@@ -709,3 +690,20 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 .story .step-card{aspect-ratio:auto;border-radius:14px}
 .story .partners-strip{margin-top:14px;gap:18px}
 .story .partners-strip img{height:26px} /* logos compacts : la carte d'octobre ne fixe plus la hauteur de toute la frise */
+
+/* ===== Cartes membres pleine photo (accueil « Le bureau », qui-sommes-nous fondateurs + premiers membres) :
+   portrait 3/4.2, nom / rôle / âge incrustés sur un fondu bas ===== */
+.bureau-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.bureau-grid-3{grid-template-columns:repeat(3,1fr);margin-top:32px}
+@media (max-width:1024px){.bureau-grid,.bureau-grid-3{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.bureau-grid,.bureau-grid-3{grid-template-columns:1fr}}
+.bureau-card{position:relative;aspect-ratio:3/4.2;border-radius:18px;overflow:hidden;background:#14151e;border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 30px -10px rgba(0,0,0,.6);text-shadow:none;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1),border-color .3s ease}
+.bureau-card:hover{transform:translateY(-6px);border-color:rgba(168,85,247,.5);box-shadow:0 20px 45px -10px rgba(168,85,247,.3)}
+.bureau-img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.bureau-card:hover .bureau-img{transform:scale(1.04)}
+.bureau-overlay{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,transparent 45%,rgba(11,12,16,.55) 70%,rgba(11,12,16,.95) 100%)}
+.bureau-content{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;flex-direction:column;gap:.2rem;padding:1.4rem 1.25rem}
+.bureau-name{font:700 1.15rem/1.2 var(--sans);color:#fff;margin:0}
+.bureau-role{font:600 .88rem/1.3 var(--sans);color:#c084fc}
+.bureau-age{font:400 .8rem/1.3 var(--sans);color:#9ca3af}
+@media (prefers-reduced-motion:reduce){.bureau-card:hover,.bureau-card:hover .bureau-img{transform:none}}

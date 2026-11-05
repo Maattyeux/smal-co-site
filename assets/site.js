@@ -103,16 +103,52 @@
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
   addEventListener('resize', upd); upd(); })();
 
-// galeries défilantes : .is-at-end quand on atteint la fin du scroll (inverse fondu + flèche)
+// galeries défilantes : .is-at-start / .is-at-end selon la position, boutons ‹ › (une carte par clic), glisser à la souris
 (function () {
   document.querySelectorAll('.scroll-gallery-wrapper').forEach(function (wrapper) {
     var sc = wrapper.firstElementChild;
     if (!sc) return;
-    function upd() { wrapper.classList.toggle('is-at-end', sc.scrollLeft + sc.clientWidth >= sc.scrollWidth - 5); }
+    function upd() {
+      wrapper.classList.toggle('is-at-start', sc.scrollLeft <= 5);
+      wrapper.classList.toggle('is-at-end', sc.scrollLeft + sc.clientWidth >= sc.scrollWidth - 5);
+    }
     sc.addEventListener('scroll', upd, { passive: true });
     addEventListener('resize', upd);
     addEventListener('load', upd); // les images lazy changent la largeur défilable
     upd();
+
+    function step() { // largeur d'une carte + l'écart entre cartes
+      var first = sc.firstElementChild;
+      return first ? first.getBoundingClientRect().width + (parseFloat(getComputedStyle(sc).columnGap) || 0) : sc.clientWidth * .8;
+    }
+    wrapper.querySelectorAll('.scroll-prev, .scroll-next').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        sc.scrollBy({ left: btn.classList.contains('scroll-prev') ? -step() : step(), behavior: 'smooth' });
+      });
+    });
+
+    // glisser à la souris (le tactile et le trackpad défilent déjà nativement)
+    var down = false, moved = false, x0 = 0, left0 = 0;
+    sc.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; moved = false; x0 = e.clientX; left0 = sc.scrollLeft;
+    });
+    sc.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - x0;
+      if (!moved && Math.abs(dx) < 5) return; // simple clic : on laisse passer
+      if (!moved) { moved = true; sc.classList.add('is-dragging'); sc.setPointerCapture(e.pointerId); }
+      sc.scrollLeft = left0 - dx;
+    });
+    function end() {
+      if (!down) return;
+      down = false;
+      sc.classList.remove('is-dragging'); // le scroll-snap recale sur la carte la plus proche
+    }
+    sc.addEventListener('pointerup', end);
+    sc.addEventListener('pointercancel', end);
+    sc.addEventListener('dragstart', function (e) { e.preventDefault(); }); // pas de glisser natif des images
+    sc.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
   });
 })();
 

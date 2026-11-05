@@ -127,7 +127,7 @@
   <p class="rv lead" data-reveal style="margin:28px 0 clamp(56px,8vw,110px)">Du Tour de France 2025 à l’affiliation FFC : les étapes clés.</p>
 
   <div class="scroll-gallery-wrapper">
-  <ol class="story" tabindex="0" aria-label="Frise chronologique, défilement horizontal">
+  <ol class="story" id="timeline-track" tabindex="0" aria-label="Frise chronologique, défilement horizontal">
    <li class="step">
     <div class="rv step-txt" data-reveal>
      <time>Juillet 2025</time>
@@ -233,7 +233,8 @@
     <div class="rv step-card" data-reveal style="--d:120ms"><div><strong>2027</strong><span>on écrit la suite</span></div></div>
    </li>
   </ol>
-  <span class="scroll-indicator" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+  <button class="scroll-indicator scroll-prev" id="timeline-prev" type="button" aria-label="Étape précédente" aria-controls="timeline-track"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+  <button class="scroll-indicator scroll-next" id="timeline-next" type="button" aria-label="Étape suivante" aria-controls="timeline-track"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
   </div>
  </div>
 </section>

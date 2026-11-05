@@ -492,16 +492,13 @@ section[id]{scroll-margin-top:72px}
 /* Indicateur de galerie défilante : fondu + flèche à droite */
 .scroll-gallery-wrapper{position:relative;width:100%}
 .scroll-gallery-wrapper::after{content:'';position:absolute;top:0;right:0;width:80px;height:100%;background:linear-gradient(to right,rgba(17,18,21,0),rgba(17,18,21,.95));pointer-events:none;border-radius:0 .5rem .5rem 0;z-index:5}
-.scroll-indicator{position:absolute;top:50%;right:15px;transform:translateY(-50%);width:44px;height:44px;background-color:rgba(255,255,255,.1);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;z-index:10;pointer-events:none;animation:bounce-right 2s infinite ease-in-out}
+.scroll-indicator{position:absolute;top:50%;right:15px;transform:translateY(-50%);width:44px;height:44px;background-color:rgba(255,255,255,.1);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;z-index:10;cursor:pointer;padding:0;animation:bounce-right 2s infinite ease-in-out}
 @keyframes bounce-right{0%,100%{transform:translate(0,-50%);opacity:.7}50%{transform:translate(6px,-50%);opacity:1}}
 @media (max-width:768px){.scroll-gallery-wrapper::after{width:40px}.scroll-indicator{width:36px;height:36px;right:10px}}
 @media (prefers-reduced-motion:reduce){.scroll-indicator{animation:none}}
 .scroll-gallery-wrapper::after,.scroll-indicator{transition:opacity .3s}
 .scroll-gallery-wrapper.is-at-end::after{right:auto;left:0;background:linear-gradient(to left,rgba(17,18,21,0),rgba(17,18,21,.95));border-radius:.5rem 0 0 .5rem}
-.scroll-gallery-wrapper.is-at-end .scroll-indicator{right:auto;left:15px;animation-name:bounce-left}
-.scroll-gallery-wrapper.is-at-end .scroll-indicator svg{transform:rotate(180deg)}
 @keyframes bounce-left{0%,100%{transform:translate(0,-50%);opacity:.7}50%{transform:translate(-6px,-50%);opacity:1}}
-@media (max-width:768px){.scroll-gallery-wrapper.is-at-end .scroll-indicator{left:10px}}
 
 /* Rythme typo commun aux titres de cartes */
 .values h3,.founders h3,.uses h3,.support .ways h3,.list-cards h3{font:700 clamp(19px,1.6vw,22px)/1.2 var(--display);letter-spacing:-.01em}
@@ -637,3 +634,11 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan,.ribbon li{font-family:var
 @media (prefers-reduced-motion:reduce){.offer-card:hover,.card-featured:hover,.btn-gold:hover{transform:none}}
 /* Contact : motif présélectionné depuis une offre partenaire (site.js) */
 .form select.is-prefilled{border-color:#a855f7;box-shadow:0 0 15px rgba(168,85,247,.4)}
+/* Frise : boutons Précédent / Suivant (site.js masque celui qui ne sert pas) + glisser à la souris */
+.scroll-indicator:hover{background-color:rgba(122,62,224,.55);border-color:var(--violet-3)}
+.scroll-prev{right:auto;left:15px;animation-name:bounce-left}
+.scroll-prev svg{transform:rotate(180deg)}
+.scroll-gallery-wrapper.is-at-start .scroll-prev,.scroll-gallery-wrapper.is-at-end .scroll-next{opacity:0;visibility:hidden}
+@media (max-width:768px){.scroll-prev{left:10px}}
+.story{cursor:grab}
+.story.is-dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto;user-select:none}

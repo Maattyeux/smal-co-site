@@ -352,16 +352,15 @@ section[id]{scroll-margin-top:72px}
 @media (max-width:560px){.profiles-3{grid-template-columns:1fr}}
 /* hero logo + scroll */
 .hero-logo{align-items:center;text-align:center}
-.hero-logo .hero-shade{background:radial-gradient(900px 520px at 50% 55%,rgba(68,10,116,.55),transparent 70%),linear-gradient(180deg,rgba(17,18,21,.72),rgba(17,18,21,.55) 45%,rgba(17,18,21,.96))}
+.hero-logo .hero-shade{background:radial-gradient(900px 520px at 50% 55%,rgba(68,10,116,.55),transparent 70%),linear-gradient(180deg,rgba(17,18,21,.62),rgba(17,18,21,.42) 45%,rgba(17,18,21,0))} /* fondu jusqu'à 0 en bas : aucune coupure avec la suite */
 /* Accueil : photo figée en fond ; au-delà des boutons, une copie floutée (flou calculé une seule fois) apparaît en fondu
    avec un voile sombre, et les sections suivantes glissent par-dessus. --b (0 → 1) est posé par site.js. */
 .hero-logo{z-index:0}
 .hero-logo .hero-img{position:fixed;inset:0;height:100%}
-.hero-logo .hero-img-blur{filter:blur(14px);scale:1.08;opacity:var(--b,0);will-change:opacity}
-.hero-veil{position:fixed;inset:0;z-index:-1;background:rgba(11,12,16,.55);opacity:var(--b,0);pointer-events:none}
-.hero-logo~section{position:relative;z-index:1;background-color:rgba(11,12,16,.92)}
-.hero-logo+section{box-shadow:0 -20px 40px rgba(11,12,16,.9)}
-.hero-logo~section~section{box-shadow:none}
+.hero-logo .hero-img-blur{filter:blur(5px);scale:1.04;opacity:var(--b,0);will-change:opacity}
+.hero-veil{position:fixed;inset:0;z-index:-1;background:rgba(11,12,16,.48);opacity:var(--b,0);pointer-events:none}
+/* sections suivantes : transparentes, sans bordure ni ombre, pour une descente continue sur la photo ; ombre portée sur le texte pour la lisibilité */
+.hero-logo~section{position:relative;z-index:1;background-color:transparent;border:0;text-shadow:0 2px 10px rgba(0,0,0,.6)}
 body:has(.hero-logo) .foot{position:relative;z-index:1}
 .hero-logo .hero-in{display:flex;flex-direction:column;align-items:center;padding-top:120px;translate:0 calc(var(--p,0)*-14vh);scale:calc(1 - var(--p,0)*.1);opacity:calc(1 - var(--p,0)*1.5)}
 .hero-mark img{width:min(80vw,780px);height:auto;filter:drop-shadow(0 18px 60px rgba(122,62,224,.5));animation:fade 1.4s .1s both;scale:calc(1 + var(--p,0)*.08)}
@@ -477,13 +476,14 @@ body:has(.hero-logo) .foot{position:relative;z-index:1}
 @media (max-width:768px){.cyclisme-bottom-gallery{grid-template-columns:repeat(2,1fr)}}
 /* Indicateur de galerie défilante : fondu + flèche à droite */
 .scroll-gallery-wrapper{position:relative;width:100%}
-.scroll-gallery-wrapper::after{content:'';position:absolute;top:0;right:0;width:80px;height:100%;background:linear-gradient(to right,rgba(17,18,21,0),rgba(17,18,21,.95));pointer-events:none;border-radius:0 .5rem .5rem 0;z-index:5}
+/* fondu de bord par masque (et non par dégradé coloré) : fonctionne sur fond uni comme sur la photo de l'accueil */
+.scroll-gallery-wrapper>:first-child{--fade:80px;-webkit-mask-image:linear-gradient(to right,#000 calc(100% - var(--fade)),transparent);mask-image:linear-gradient(to right,#000 calc(100% - var(--fade)),transparent)}
 .scroll-indicator{position:absolute;top:50%;right:15px;transform:translateY(-50%);width:44px;height:44px;background-color:rgba(255,255,255,.1);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;z-index:10;cursor:pointer;padding:0;animation:bounce-right 2s infinite ease-in-out}
 @keyframes bounce-right{0%,100%{transform:translate(0,-50%);opacity:.7}50%{transform:translate(6px,-50%);opacity:1}}
-@media (max-width:768px){.scroll-gallery-wrapper::after{width:40px}.scroll-indicator{width:36px;height:36px;right:10px}}
+@media (max-width:768px){.scroll-gallery-wrapper>:first-child{--fade:40px}.scroll-indicator{width:36px;height:36px;right:10px}}
 @media (prefers-reduced-motion:reduce){.scroll-indicator{animation:none}}
-.scroll-gallery-wrapper::after,.scroll-indicator{transition:opacity .3s}
-.scroll-gallery-wrapper.is-at-end::after{right:auto;left:0;background:linear-gradient(to left,rgba(17,18,21,0),rgba(17,18,21,.95));border-radius:.5rem 0 0 .5rem}
+.scroll-indicator{transition:opacity .3s}
+.scroll-gallery-wrapper.is-at-end>:first-child{-webkit-mask-image:linear-gradient(to left,#000 calc(100% - var(--fade)),transparent);mask-image:linear-gradient(to left,#000 calc(100% - var(--fade)),transparent)}
 @keyframes bounce-left{0%,100%{transform:translate(0,-50%);opacity:.7}50%{transform:translate(-6px,-50%);opacity:1}}
 
 /* Rythme typo commun aux titres de cartes */

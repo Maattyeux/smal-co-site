@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact — SMAL & CO</title>
-<meta name="description" content="Contacter SMAL & CO : partenariat, adhésion, presse ou événement.">
+<meta name="description" content="Contacter SMAL & CO : partenariat, mécénat ou demande d’information.">
 <meta name="theme-color" content="#111215">
 <link rel="icon" href="logos/smal-mark.png" type="image/png">
 <!-- TODO: remplacer [DOMAINE] par le domaine définitif -->
@@ -13,14 +13,14 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="SMAL &amp; CO">
 <meta property="og:title" content="Contact — SMAL & CO">
-<meta property="og:description" content="Contacter SMAL & CO : partenariat, adhésion, presse ou événement.">
+<meta property="og:description" content="Contacter SMAL & CO : partenariat, mécénat ou demande d’information.">
 <meta property="og:url" content="https://[DOMAINE]/contact.html">
 <meta property="og:image" content="https://[DOMAINE]/img/og-default.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact — SMAL & CO">
-<meta name="twitter:description" content="Contacter SMAL & CO : partenariat, adhésion, presse ou événement.">
+<meta name="twitter:description" content="Contacter SMAL & CO : partenariat, mécénat ou demande d’information.">
 <meta name="twitter:image" content="https://[DOMAINE]/img/og-default.jpg">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin>
@@ -52,7 +52,7 @@
  <div class="wrap">
   <p class="eyebrow">Contact</p>
   <h1 class="h-xl">Parlons-en.</h1>
-  <p class="lead">Un projet de partenariat, l’envie de rejoindre l’équipe, une question presse : on répond vite.</p>
+  <p class="lead">Un projet de partenariat, de mécénat ou une simple question : on répond vite.</p>
  </div>
 </section>
 
@@ -87,11 +87,11 @@
    <label>Nom<input name="nom" required autocomplete="name"></label>
    <label>E-mail<input name="email" type="email" required autocomplete="email"></label>
    <label>Sujet
-    <select name="motif_contact">
-     <option>Partenariat</option>
-     <option>Événement</option>
-     <option>Presse</option>
-     <option>Autre</option>
+    <select name="motif_contact" id="contact-subject">
+     <option value="Information générale">Information générale</option>
+     <option value="Partenariat Global">Partenariat Global · Partenaire Majeur SMAL & CO</option>
+     <option value="Partenariat Cyclisme">Partenariat Cyclisme · Team Cyclisme FFC</option>
+     <option value="Partenariat Running">Partenariat Running · Team Running & Trail</option>
     </select>
    </label>
    <label>Message<textarea name="message" rows="6" required minlength="10"></textarea></label>

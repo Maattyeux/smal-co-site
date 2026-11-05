@@ -160,6 +160,7 @@ h1,h2,h3,p{margin:0}
 .founders h3{font:700 20px/1.2 var(--display)}
 .role{color:var(--violet-3);font-weight:600;margin-top:4px}
 .founders .muted{font-size:14px;margin-top:10px}
+.founders .age{color:#9ca3af;font-size:.9rem;margin-top:6px} /* âge discret sous le rôle (fondateurs, qui-sommes-nous) */
 
 /* Pages équipes */
 .cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start}

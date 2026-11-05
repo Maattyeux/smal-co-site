@@ -1,0 +1,5 @@
+# TODO: remplacer [DOMAINE] par le domaine définitif
+User-agent: *
+Allow: /
+
+Sitemap: https://[DOMAINE]/sitemap.xml

@@ -1,0 +1,16 @@
+{
+  "name": "SMAL & CO",
+  "short_name": "SMAL & CO",
+  "lang": "fr",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#111215",
+  "theme_color": "#111215",
+  "icons": [
+    {
+      "src": "logos/smal-mark.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

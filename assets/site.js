@@ -95,17 +95,6 @@
     h.style.setProperty('--b', Math.min(Math.max(scrollY / 550, 0), 1).toFixed(3)); }
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true }); upd(); })();
 
-// fondu enchaîné : progression du scroll dans la section exposée en --x (0 → 1), sur la plage centrale
-(function () { var sec = document.querySelector('.scroll-crossfade-section');
-  if (!sec) return;
-  var ticking = false;
-  function upd() { ticking = false;
-    var r = sec.getBoundingClientRect(), run = r.height - innerHeight;
-    var p = run > 0 ? -r.top / run : 0;
-    sec.style.setProperty('--x', Math.min(Math.max((p - .25) / .5, 0), 1).toFixed(3)); }
-  addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
-  addEventListener('resize', upd); upd(); })();
-
 // galeries défilantes : .is-at-start / .is-at-end selon la position, boutons ‹ › (une carte par clic), glisser à la souris
 (function () {
   document.querySelectorAll('.scroll-gallery-wrapper').forEach(function (wrapper) {
@@ -159,7 +148,7 @@
 (function () {
   if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches || document.body.classList.contains('low-bandwidth');
-  document.querySelectorAll('.bento-card, .crossfade-image-box').forEach(function (el) {
+  document.querySelectorAll('.bento-card').forEach(function (el) {
     var tilt = !still;
     el.addEventListener('mousemove', function (e) {
       var r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;

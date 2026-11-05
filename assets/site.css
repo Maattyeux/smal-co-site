@@ -652,9 +652,9 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 /* ===== Fond photo fixe réutilisable (qui-sommes-nous) : <div class="backdrop" data-backdrop="500"> en tête de <main>
    Net en haut ; sur les N premiers px de défilement, une copie floutée une seule fois apparaît en fondu et le voile fonce (35 % → 65 %). ===== */
 .backdrop{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.backdrop-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;scale:calc(1.02 + var(--b,0)*.03)} /* cadrage sur les visages */
+.backdrop-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;scale:calc(1.02 + var(--b,0)*.03)} /* photo 9999 : maillots face à la mer */
 .backdrop-blur{filter:blur(6px);opacity:var(--b,0);will-change:opacity}
-.backdrop-veil{position:absolute;inset:0;background:rgb(11,12,16);opacity:calc(.35 + var(--b,0)*.30)}
+.backdrop-veil{position:absolute;inset:0;background:rgb(11,12,16);opacity:calc(.32 + var(--b,0)*.30)} /* 32 % en haut → 62 % */
 .backdrop~section{position:relative;z-index:1;background-color:transparent;border:0;text-shadow:0 2px 10px rgba(0,0,0,.6)}
 .phead-over{min-height:85vh;display:flex;align-items:center;background:none}
 .phead-over .h-xl{text-shadow:0 3px 15px rgba(0,0,0,.85)}
@@ -712,3 +712,13 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 .duo-overlay{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,transparent 60%,rgba(11,12,16,.8) 100%)}
 .duo-tag{position:absolute;left:1.5rem;bottom:1.5rem;padding:.4rem .9rem;border-radius:50px;font:600 .82rem/1.2 var(--sans);letter-spacing:.6px;text-transform:uppercase;color:#f3e8ff;background:rgba(18,19,29,.7);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12)}
 @media (prefers-reduced-motion:reduce){.media-duo-card:hover,.media-duo-card:hover .duo-img{transform:none}}
+/* Fondateurs (qui-sommes-nous) : grand format élancé, grille élargie au-delà du conteneur (1360px max) */
+.bureau-grid-lg{gap:1.5rem;width:min(1360px,calc(100vw - 2*var(--gut)));position:relative;left:50%;translate:-50% 0}
+.bureau-grid-lg .bureau-card{aspect-ratio:3/4.6;border-radius:16px}
+.bureau-grid-lg .bureau-card:hover{transform:translateY(-8px);box-shadow:0 24px 50px -10px rgba(168,85,247,.35)}
+.bureau-grid-lg .bureau-card:hover .bureau-img{transform:scale(1.05)}
+.bureau-grid-lg .bureau-overlay{background:linear-gradient(to bottom,transparent 50%,rgba(11,12,16,.5) 75%,rgba(11,12,16,.95) 100%)}
+.bureau-grid-lg .bureau-content{padding:1.5rem 1.3rem;gap:.25rem}
+.bureau-grid-lg .bureau-name{font-size:1.25rem}
+@media (max-width:1024px){.bureau-grid-lg{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.bureau-grid-lg{grid-template-columns:1fr}}

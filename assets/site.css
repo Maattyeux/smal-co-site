@@ -16,8 +16,8 @@
   --sec-y:clamp(80px,12vw,160px); --sec-y-tight:clamp(48px,7vw,96px);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--sans);overflow-x:hidden}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 ul,ol{margin:0;padding:0;list-style:none}
@@ -600,6 +600,6 @@ div.img-fallback{display:grid;place-items:center;width:100%;min-height:120px;bac
 
 /* Impact sur tous les grands titres (h1 et titres de section .h-xl/.h-lg/.section-title, quelle que soit la balise), slogan du hero, bandeau ;
    sous-titres .h-md, h3, surtitres, cartes, boutons et textes restent en Inter */
-h1,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan,.ribbon li{font-family:var(--impact);letter-spacing:.02em}
+h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan,.ribbon li{font-family:var(--impact);letter-spacing:.02em}
 /* Affiche Team 2027 (cyclisme.html, section #team-2027) */
 .team-poster{display:block;width:100%;max-width:480px;height:auto;margin:0 auto 2rem;border-radius:16px;border:1px solid rgba(168,85,247,.25);box-shadow:0 10px 30px -10px rgba(168,85,247,.3)}

@@ -352,13 +352,13 @@ section[id]{scroll-margin-top:72px}
 @media (max-width:560px){.profiles-3{grid-template-columns:1fr}}
 /* hero logo + scroll */
 .hero-logo{align-items:center;text-align:center}
-.hero-logo .hero-shade{background:radial-gradient(900px 520px at 50% 55%,rgba(68,10,116,.55),transparent 70%),linear-gradient(180deg,rgba(17,18,21,.62),rgba(17,18,21,.42) 45%,rgba(17,18,21,0))} /* fondu jusqu'à 0 en bas : aucune coupure avec la suite */
+.hero-logo .hero-shade{background:radial-gradient(900px 520px at 50% 55%,rgba(68,10,116,.55),transparent 70%),linear-gradient(180deg,rgba(17,18,21,.45),rgba(17,18,21,0) 40%)} /* juste de quoi lire le menu ; l'assombrissement global vient de .hero-veil */
 /* Accueil : photo figée en fond ; au-delà des boutons, une copie floutée (flou calculé une seule fois) apparaît en fondu
    avec un voile sombre, et les sections suivantes glissent par-dessus. --b (0 → 1) est posé par site.js. */
 .hero-logo{z-index:0}
-.hero-logo .hero-img{position:fixed;inset:0;height:100%}
-.hero-logo .hero-img-blur{filter:blur(5px);scale:1.04;opacity:var(--b,0);will-change:opacity}
-.hero-veil{position:fixed;inset:0;z-index:-1;background:rgba(11,12,16,.48);opacity:var(--b,0);pointer-events:none}
+.hero-logo .hero-img{position:fixed;inset:0;height:100%;scale:calc(1 + var(--b,0)*.04)} /* zoom discret 1 → 1.04 */
+.hero-logo .hero-img-blur{filter:blur(6px);scale:calc(1.03 + var(--b,0)*.04);opacity:var(--b,0);will-change:opacity} /* flou 6px, calculé une fois ; seule l'opacité varie */
+.hero-veil{position:fixed;inset:0;z-index:-1;background:rgb(11,12,16);opacity:calc(.30 + var(--b,0)*.32);pointer-events:none} /* voile 30 % en haut → 62 % */
 /* sections suivantes : transparentes, sans bordure ni ombre, pour une descente continue sur la photo ; ombre portée sur le texte pour la lisibilité */
 .hero-logo~section{position:relative;z-index:1;background-color:transparent;border:0;text-shadow:0 2px 10px rgba(0,0,0,.6)}
 body:has(.hero-logo) .foot{position:relative;z-index:1}

@@ -682,3 +682,7 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 .showcase-card:hover,.showcase-card:focus-visible{transform:translateY(-6px);border-color:rgba(168,85,247,.4);box-shadow:0 20px 40px -10px rgba(0,0,0,.7)}
 .showcase-card:hover .showcase-img{transform:scale(1.05)}
 .showcase-card:hover .showcase-arrow,.showcase-card:focus-visible .showcase-arrow{opacity:1;transform:translateX(4px);color:#c084fc}
+/* cadrage des panneaux « Quatre terrains » (photos paysage dans un panneau vertical : seul l'axe horizontal compte) */
+.img-running{object-position:40% center} /* coureur légèrement à gauche du centre */
+.img-events{object-position:center center}
+.img-com{object-position:center top} /* micro brandé en haut de la photo */

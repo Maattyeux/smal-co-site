@@ -199,7 +199,6 @@ h1,h2,h3,p{margin:0}
 .form label{display:grid;gap:8px;font:600 14px/1 var(--sans)}
 .form input:not([type=checkbox]),.form select,.form textarea{width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--text);font:400 16px/1.4 var(--sans)}
 .form .check{display:flex;gap:10px;align-items:flex-start;font-weight:400;line-height:1.5;color:var(--muted)}
-.hp{position:absolute;left:-9999px}
 
 /* Légal */
 .legal{max-width:760px}
@@ -362,7 +361,6 @@ section[id]{scroll-margin-top:72px}
 .list-cards time,.list-cards .k{display:block;font:600 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--violet-3);margin-bottom:12px}
 .list-cards h3{font:700 22px/1.2 var(--display);margin-bottom:8px}
 .list-cards p{color:var(--muted);font-size:16px}
-.form-note{color:var(--muted);font-size:14px}
 @media (max-width:980px){.poles-4{grid-template-columns:repeat(2,1fr)}.list-cards>li{flex-basis:calc((100% - 20px)/2)}}
 @media (max-width:560px){.poles-4{grid-template-columns:1fr}.list-cards>li{flex-basis:100%}}
 /* qui-sommes-nous */
@@ -544,12 +542,7 @@ section[id]{scroll-margin-top:72px}
 /* Logo Premier peu lisible sur fond sombre */
 .step-logo img[src*="premier"]{background:#f4f2fa}
 
-/* Formulaire de contact */
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.form-status:empty{display:none}
-.form-status{font-size:15px;padding:12px 16px;border-radius:12px;border:1px solid var(--line)}
-.form-status.ok{border-color:rgba(120,220,160,.5);color:#bdf0cf}
-.form-status.err{border-color:rgba(255,120,120,.5);color:#ffc4c4}
+/* Contact : bouton « Copier l’adresse » (formulaire envoyé par Netlify Forms, voir contact.html) */
 .copy-btn{margin-top:14px;padding:11px 18px;font-size:14px;min-height:44px}
 
 /* DA lumineuse : halos doux, élévation légère, liséré sur les photos */
@@ -586,3 +579,18 @@ body.nav-locked{overflow:hidden}
 .low-bandwidth .founders li::before{display:none}
 /* Image introuvable : remplacée par ce bloc monogramme (site.js) */
 div.img-fallback{display:grid;place-items:center;width:100%;min-height:120px;background:radial-gradient(circle at 50% 40%,rgba(122,62,224,.18),transparent 70%),var(--panel);color:rgba(255,255,255,.4);font:800 clamp(14px,2.2vw,24px)/1 var(--display);letter-spacing:.08em;text-align:center}
+
+/* Page merci (merci.html, affichée après l'envoi du formulaire de contact) */
+.merci{min-height:100svh;display:grid;place-items:center;text-align:center;padding:clamp(120px,16vw,170px) 0 var(--sec-y-tight);background:radial-gradient(900px 520px at 50% 20%,rgba(122,62,224,.35),transparent 70%),radial-gradient(700px 360px at 50% 110%,rgba(217,178,91,.12),transparent 70%)}
+.merci-in{display:flex;flex-direction:column;align-items:center}
+.merci-check{fill:none;stroke-linecap:round;stroke-linejoin:round;margin-bottom:28px;filter:drop-shadow(0 12px 40px rgba(122,62,224,.6))}
+.merci-check circle{stroke:var(--violet-2);stroke-width:3;stroke-dasharray:227;animation:draw 1s var(--ease) both}
+.merci-check path{stroke:#fff;stroke-width:5;stroke-dasharray:50;animation:draw .6s .8s var(--ease) both}
+@keyframes draw{from{stroke-dashoffset:var(--len,227)}to{stroke-dashoffset:0}}
+.merci-check path{--len:50}
+.merci-eyebrow{animation:fade 1s .9s both}
+.merci-title{animation:fade 1s 1s both}
+.merci-lead{margin:24px auto 0;max-width:52ch;animation:fade 1s 1.15s both}
+.merci-steps{margin-top:clamp(40px,6vw,72px);width:100%;text-align:left}
+.merci-wait{margin-top:clamp(36px,5vw,56px);color:var(--muted)}
+.merci-cta{justify-content:center;margin-top:20px}

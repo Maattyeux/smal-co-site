@@ -89,7 +89,10 @@
 (function () { var h = document.querySelector('[data-hero]');
   if (!h || matchMedia('(prefers-reduced-motion: reduce)').matches || document.body.classList.contains('low-bandwidth')) return;
   var ticking = false;
-  function upd() { ticking = false; h.style.setProperty('--p', Math.min(Math.max(scrollY / h.offsetHeight, 0), 1).toFixed(3)); }
+  function upd() { ticking = false; var hh = h.offsetHeight;
+    h.style.setProperty('--p', Math.min(Math.max(scrollY / hh, 0), 1).toFixed(3));
+    // flou + voile : de 45 % à 110 % de la hauteur du hero (juste sous les boutons)
+    h.style.setProperty('--b', Math.min(Math.max((scrollY - hh * .45) / (hh * .65), 0), 1).toFixed(3)); }
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true }); upd(); })();
 
 // fondu enchaîné : progression du scroll dans la section exposée en --x (0 → 1), sur la plage centrale

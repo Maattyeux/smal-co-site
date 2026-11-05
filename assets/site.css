@@ -82,13 +82,6 @@ h1,h2,h3,p{margin:0}
 @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes cue{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
 
-/* Bandeau défilant */
-.ribbon{overflow:hidden;border-block:1px solid var(--line);background:var(--bg-2)}
-.ribbon-track{display:flex;width:max-content;animation:marq 40s linear infinite}
-.ribbon ul{display:flex;flex:none}
-.ribbon li{font:800 clamp(28px,5vw,56px)/1 var(--display);letter-spacing:-.02em;text-transform:uppercase;padding:22px clamp(20px,3vw,40px);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.35);white-space:nowrap}
-.ribbon li::after{content:"✕";margin-left:clamp(20px,3vw,40px);font-size:.4em;color:var(--violet-2);-webkit-text-stroke:0;vertical-align:middle}
-@keyframes marq{to{transform:translateX(-50%)}}
 
 /* Sections */
 .sec{padding:var(--sec-y) 0}
@@ -244,7 +237,6 @@ h1,h2,h3,p{margin:0}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .rv,.js [data-words] .w{opacity:1;transform:none}
-  .ribbon-track{overflow-x:auto}
 }
 
 
@@ -377,7 +369,16 @@ section[id]{scroll-margin-top:72px}
 /* hero logo + scroll */
 .hero-logo{align-items:center;text-align:center}
 .hero-logo .hero-shade{background:radial-gradient(900px 520px at 50% 55%,rgba(68,10,116,.55),transparent 70%),linear-gradient(180deg,rgba(17,18,21,.72),rgba(17,18,21,.55) 45%,rgba(17,18,21,.96))}
-.hero-logo .hero-img{translate:0 calc(var(--p,0)*22%)}
+/* Accueil : photo figée en fond ; au-delà des boutons, une copie floutée (flou calculé une seule fois) apparaît en fondu
+   avec un voile sombre, et les sections suivantes glissent par-dessus. --b (0 → 1) est posé par site.js. */
+.hero-logo{z-index:0}
+.hero-logo .hero-img{position:fixed;inset:0;height:100%}
+.hero-logo .hero-img-blur{filter:blur(14px);scale:1.08;opacity:var(--b,0);will-change:opacity}
+.hero-veil{position:fixed;inset:0;z-index:-1;background:rgba(11,12,16,.55);opacity:var(--b,0);pointer-events:none}
+.hero-logo~section{position:relative;z-index:1;background-color:rgba(11,12,16,.92)}
+.hero-logo+section{box-shadow:0 -20px 40px rgba(11,12,16,.9)}
+.hero-logo~section~section{box-shadow:none}
+body:has(.hero-logo) .foot{position:relative;z-index:1}
 .hero-logo .hero-in{display:flex;flex-direction:column;align-items:center;padding-top:120px;translate:0 calc(var(--p,0)*-14vh);scale:calc(1 - var(--p,0)*.1);opacity:calc(1 - var(--p,0)*1.5)}
 .hero-mark img{width:min(80vw,780px);height:auto;filter:drop-shadow(0 18px 60px rgba(122,62,224,.5));animation:fade 1.4s .1s both;scale:calc(1 + var(--p,0)*.08)}
 .hero-slogan{margin-top:clamp(18px,3vw,34px);font:800 clamp(24px,3.2vw,44px)/1 var(--display);letter-spacing:-.02em;background:linear-gradient(90deg,#fff,var(--violet-3));-webkit-background-clip:text;background-clip:text;color:transparent;animation:fade 1s .5s both}
@@ -598,7 +599,7 @@ div.img-fallback{display:grid;place-items:center;width:100%;min-height:120px;bac
 
 /* Impact sur tous les grands titres (h1 et titres de section .h-xl/.h-lg/.section-title, quelle que soit la balise), slogan du hero, bandeau ;
    sous-titres .h-md, h3, surtitres, cartes, boutons et textes restent en Inter */
-h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan,.ribbon li{font-family:var(--impact);letter-spacing:.02em}
+h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);letter-spacing:.02em}
 /* Affiche Team 2027 (cyclisme.html, section #team-2027) */
 .team-poster{display:block;width:100%;max-width:480px;height:auto;margin:0 auto 2rem;border-radius:16px;border:1px solid rgba(168,85,247,.25);box-shadow:0 10px 30px -10px rgba(168,85,247,.3)}
 

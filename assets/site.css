@@ -2,6 +2,9 @@
 @font-face{font-family:"SMAL Sans";src:url(../fonts/inter-600.woff) format("woff");font-weight:600;font-display:swap}
 /* Impact (police système) déclarée pour toutes les graisses : évite le faux gras que le navigateur ajouterait sur font-weight:700/800 */
 @font-face{font-family:"SMAL Impact";src:local("Impact");font-weight:100 900}
+/* Newsreader (OFL), auto-hébergée : pas d'appel à Google Fonts, donc pas d'IP transmise à un tiers */
+@font-face{font-family:"Newsreader";src:url(../fonts/newsreader-normal.woff2) format("woff2");font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(../fonts/newsreader-italic.woff2) format("woff2");font-weight:200 800;font-style:italic;font-display:swap}
 @font-face{font-family:"SMAL Display";src:url(../fonts/outfit-700.woff2) format("woff2");font-weight:700;font-display:swap}
 @font-face{font-family:"SMAL Display";src:url(../fonts/outfit-800.woff2) format("woff2");font-weight:800;font-display:swap}
 
@@ -12,14 +15,15 @@
   --head:#fff; --eyebrow:#a855f7; --lift:0 10px 30px -10px rgba(0,0,0,.5);
   --gold:#d9b25b;
   --sans:"SMAL Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --display:"SMAL Display","SMAL Sans",system-ui,sans-serif;
+  --serif:"Newsreader",Georgia,serif; /* textes, sous-titres, cartes */
+  --display:var(--serif);
   --impact:"SMAL Impact",Impact,"Arial Black","SMAL Display",sans-serif; /* grands titres seulement ; Outfit en secours là où Impact manque (Android, Linux) */
   --wrap:1200px; --gut:clamp(20px,5vw,48px); --ease:cubic-bezier(.2,.8,.2,1);
   --sec-y:clamp(80px,12vw,160px); --sec-y-tight:clamp(48px,7vw,96px);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--serif);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 ul,ol{margin:0;padding:0;list-style:none}
@@ -598,5 +602,5 @@ div.img-fallback{display:grid;place-items:center;width:100%;min-height:120px;bac
 .merci-wait{margin-top:clamp(36px,5vw,56px);color:var(--muted)}
 .merci-cta{justify-content:center;margin-top:20px}
 
-/* Impact réservé aux grands titres (h1, titres de section, hero, bandeau) ; cartes, sous-titres, chiffres et frise restent en Outfit (--display) */
-.h-mega,.h-xl,.h-lg,.hero-slogan,.ribbon li,.section-title{font-family:var(--impact);letter-spacing:.02em}
+/* Impact réservé aux grands titres d'accroche (h1, slogan du hero, bandeau) ; tout le reste en Newsreader, menus/boutons/étiquettes en Inter (--sans) */
+h1,h1.h-xl,.hero-slogan,.ribbon li{font-family:var(--impact);letter-spacing:.02em}

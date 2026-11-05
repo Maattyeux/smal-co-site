@@ -603,4 +603,6 @@ div.img-fallback{display:grid;place-items:center;width:100%;min-height:120px;bac
 .merci-cta{justify-content:center;margin-top:20px}
 
 /* Impact réservé aux grands titres d'accroche (h1, slogan du hero, bandeau) ; tout le reste en Newsreader, menus/boutons/étiquettes en Inter (--sans) */
-h1,h1.h-xl,.hero-slogan,.ribbon li{font-family:var(--impact);letter-spacing:.02em}
+h1,h1.h-xl,.impact,.hero-slogan,.ribbon li{font-family:var(--impact);letter-spacing:.02em}
+/* Affiche Team 2027 (cyclisme.html, section #team-2027) */
+.team-poster{display:block;width:100%;max-width:480px;height:auto;margin:0 auto 2rem;border-radius:16px;border:1px solid rgba(168,85,247,.25);box-shadow:0 10px 30px -10px rgba(168,85,247,.3)}

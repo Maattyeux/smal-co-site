@@ -596,7 +596,8 @@ div.img-fallback{display:grid;place-items:center;width:100%;min-height:120px;bac
 .merci-wait{margin-top:clamp(36px,5vw,56px);color:var(--muted)}
 .merci-cta{justify-content:center;margin-top:20px}
 
-/* Impact réservé aux grands titres d'accroche (h1, .impact, slogan du hero, bandeau) ; tout le reste en Inter */
-h1,h1.h-xl,.impact,.hero-slogan,.ribbon li{font-family:var(--impact);letter-spacing:.02em}
+/* Impact sur tous les grands titres (h1 et titres de section .h-xl/.h-lg/.section-title, quelle que soit la balise), slogan du hero, bandeau ;
+   sous-titres .h-md, h3, surtitres, cartes, boutons et textes restent en Inter */
+h1,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan,.ribbon li{font-family:var(--impact);letter-spacing:.02em}
 /* Affiche Team 2027 (cyclisme.html, section #team-2027) */
 .team-poster{display:block;width:100%;max-width:480px;height:auto;margin:0 auto 2rem;border-radius:16px;border:1px solid rgba(168,85,247,.25);box-shadow:0 10px 30px -10px rgba(168,85,247,.3)}

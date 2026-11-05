@@ -201,3 +201,15 @@
   sel.classList.add('is-prefilled');
   sel.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
 })();
+
+// menu « Nos Pôles » : clic/toucher pour ouvrir (le survol suffit à la souris), Échap ou clic ailleurs pour fermer
+(function () {
+  document.querySelectorAll('.nav-dd').forEach(function (dd) {
+    var btn = dd.querySelector('.nav-dd-toggle');
+    if (!btn) return;
+    function set(open) { dd.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); }
+    btn.addEventListener('click', function () { set(!dd.classList.contains('open')); });
+    document.addEventListener('click', function (e) { if (!dd.contains(e.target)) set(false); });
+    dd.addEventListener('keydown', function (e) { if (e.key === 'Escape' && dd.classList.contains('open')) { set(false); btn.focus(); } });
+  });
+})();

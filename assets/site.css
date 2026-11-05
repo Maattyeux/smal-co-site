@@ -642,3 +642,34 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan,.ribbon li{font-family:var
 @media (max-width:768px){.scroll-prev{left:10px}}
 .story{cursor:grab}
 .story.is-dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto;user-select:none}
+
+/* ===== Menu « Nos Pôles » (en-tête, toutes les pages) ===== */
+.nav-dd{position:relative}
+.nav-dd-toggle{display:inline-flex;align-items:center;gap:.35rem;background:none;border:0;padding:6px 0;cursor:pointer;color:var(--text);font:600 14px/1 var(--sans);position:relative}
+.nav-dd-toggle:hover,.nav-dd-toggle.active{color:#fff}
+.nav-dd-toggle.active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--violet-2)}
+.chevron-down{font-size:.75rem;color:#a855f7;transition:transform .25s ease}
+.nav-dd:hover .chevron-down,.nav-dd.open .chevron-down{transform:rotate(180deg)}
+.dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(10px);min-width:230px;padding:.6rem;margin-top:8px;border-radius:14px;background:#141520;border:1px solid rgba(168,85,247,.3);box-shadow:0 16px 36px -8px rgba(0,0,0,.7),0 0 20px rgba(168,85,247,.15);opacity:0;visibility:hidden;transition:opacity .25s ease,transform .25s ease,visibility .25s}
+.dropdown-menu::before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px} /* pont invisible : le survol ne se perd pas entre le bouton et le menu */
+.nav-dd:hover .dropdown-menu,.nav-dd:focus-within .dropdown-menu,.nav-dd.open .dropdown-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.nav .dropdown-item{display:flex;flex-direction:column;gap:.15rem;padding:.65rem .9rem;border-radius:8px;text-decoration:none;white-space:nowrap;transition:background .2s ease}
+.nav a.dropdown-item:not(.btn)::after{display:none} /* plus fort que .nav a:not(.btn)::after (soulignement du menu) */
+.nav .dropdown-item:hover,.nav .dropdown-item.active{background:rgba(168,85,247,.12)}
+.dropdown-item-badge{font:700 .68rem/1 var(--sans);letter-spacing:.6px;color:var(--violet-3)}
+.dropdown-item-title{font:600 .92rem/1.2 var(--sans);color:#fff}
+@media (max-width:1080px){.nav-dd-toggle{font-size:13px;white-space:nowrap}}
+@media (max-width:960px){.nav-dd-toggle{font-size:12px}}
+@media (max-width:920px){.nav-dd-toggle{font-size:11.5px}}
+/* tiroir mobile : le sous-menu s'ouvre au toucher, en liste sous « Nos Pôles » */
+@media (max-width:868px){
+  .nav-dd{width:100%}
+  .nav-dd-toggle{font-size:22px;padding:10px 0}
+  .nav-dd-toggle.active::after{display:none}
+  .dropdown-menu,.nav-dd:hover .dropdown-menu,.nav-dd:focus-within .dropdown-menu{position:static;transform:none;margin:0;min-width:0;padding:0 0 6px 14px;background:none;border:0;border-left:2px solid rgba(168,85,247,.35);border-radius:0;box-shadow:none;opacity:1;visibility:visible;display:none}
+  .nav-dd.open .dropdown-menu{display:block;transform:none}
+  .dropdown-menu::before{display:none}
+  .nav .dropdown-item{padding:10px 12px}
+  .nav-dd:hover .chevron-down{transform:none}
+  .nav-dd.open .chevron-down{transform:rotate(180deg)}
+}

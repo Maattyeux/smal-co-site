@@ -79,13 +79,15 @@
    </div>
   </div>
 
-  <!-- TODO: renseigner data-endpoint (ex. Formspree) pour un envoi direct ; vide = ouverture de la messagerie -->
-  <form class="rv form card" data-reveal data-mailto="smal.partner@gmail.com" data-endpoint="">
+   <form class="rv form card" data-reveal name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+   <input type="hidden" name="form-name" value="contact" />
+   <input type="hidden" name="subject" value="REPONSE CONTACT SITE WEB - Nouveau message reçu" />
+   <p style="display:none;"><label>Ne pas remplir : <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
    <h2 class="h-md">Écrivez-nous</h2>
    <label>Nom<input name="nom" required autocomplete="name"></label>
    <label>E-mail<input name="email" type="email" required autocomplete="email"></label>
    <label>Sujet
-    <select name="sujet">
+    <select name="motif_contact">
      <option>Partenariat</option>
      <option>Événement</option>
      <option>Presse</option>
@@ -93,10 +95,7 @@
     </select>
    </label>
    <label>Message<textarea name="message" rows="6" required minlength="10"></textarea></label>
-   <label class="hp" aria-hidden="true">Ne pas remplir<input name="site" tabindex="-1" autocomplete="off"></label>
    <button class="btn" type="submit">Envoyer</button>
-   <p class="form-note">L’envoi ouvre votre messagerie avec le message pré-rempli.</p>
-   <p class="form-status" role="status" aria-live="polite"></p>
   </form>
  </div>
 </section>

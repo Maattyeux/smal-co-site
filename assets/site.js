@@ -72,32 +72,6 @@
 })();
 
 
-// Formulaire de contact : POST vers data-endpoint s'il est renseigné, sinon ouvre la messagerie pré-remplie
-(function () {
-  var f = document.querySelector('[data-mailto]');
-  if (!f) return;
-  var st = f.querySelector('.form-status');
-  function say(t, ok) { if (!st) return; st.textContent = t; st.className = 'form-status ' + (ok ? 'ok' : 'err'); }
-  f.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (!f.checkValidity()) { f.reportValidity(); return say('Merci de compléter les champs requis.', false); }
-    var d = new FormData(f);
-    if (d.get('site')) return; // honeypot rempli : robot
-    var ep = f.getAttribute('data-endpoint');
-    if (!ep) {
-      var body = d.get('message') + '\n\n' + d.get('nom') + ' · ' + d.get('email');
-      location.href = 'mailto:' + f.getAttribute('data-mailto') +
-        '?subject=' + encodeURIComponent('[' + d.get('sujet') + '] ' + d.get('nom')) +
-        '&body=' + encodeURIComponent(body);
-      return say('Votre messagerie s’ouvre avec le message pré-rempli.', true);
-    }
-    d.delete('site');
-    fetch(ep, { method: 'POST', body: d, headers: { Accept: 'application/json' } })
-      .then(function (r) { if (!r.ok) throw r; f.reset(); say('Merci, votre message est bien parti. On vous répond vite.', true); })
-      .catch(function () { say('L’envoi a échoué. Écrivez-nous directement à ' + f.getAttribute('data-mailto') + '.', false); });
-  });
- })();
-
 // bouton « Copier l’adresse »
 (function () {
   document.querySelectorAll('[data-copy]').forEach(function (b) {

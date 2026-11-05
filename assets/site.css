@@ -101,7 +101,8 @@ h1,h2,h3,p{margin:0}
 /* Pôles */
 .poles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .pole-wrap{display:block}
-.pole{position:relative;display:block;aspect-ratio:4/5;border-radius:24px;overflow:hidden;text-decoration:none;isolation:isolate;border:1px solid var(--line)}
+.pole{position:relative;display:block;aspect-ratio:4/5;border-radius:22px;overflow:hidden;text-decoration:none;isolation:isolate;border:1px solid rgba(255,255,255,.07);box-shadow:0 12px 30px -10px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1),border-color .35s ease}
+.pole:hover{transform:translateY(-8px) scale(1.015);border-color:rgba(168,85,247,.45);box-shadow:0 20px 45px -10px rgba(168,85,247,.3),inset 0 1px 1px rgba(255,255,255,.15)} /* même survol que les offres partenaires */
 .pole img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s var(--ease)}
 .pole:hover img{transform:scale(1.07)}
 .pole-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(17,18,21,0) 5%,rgba(17,18,21,.55) 45%,rgba(17,18,21,.95) 100%),linear-gradient(135deg,rgba(68,10,116,.35),transparent 60%)}
@@ -610,28 +611,28 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan,.ribbon li{font-family:var
 .partners-intro{color:#d1d5db;font-size:1.05rem;line-height:1.6}
 /* min(310px,100%) : pas de débordement horizontal sous 360px de large */
 .offers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(310px,100%),1fr));gap:2rem;align-items:stretch}
-.offer-card{position:relative;background:linear-gradient(145deg,#181924,#0f1017);border-radius:20px;padding:2.2rem;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.08);box-shadow:0 15px 35px -10px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,border-color .35s ease;transform-style:preserve-3d}
-.offer-card:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(168,85,247,.4);box-shadow:0 25px 45px -10px rgba(168,85,247,.25),inset 0 1px 2px rgba(255,255,255,.2)}
-.card-featured{background:linear-gradient(145deg,#1e1b24,#121019);border:1.5px solid rgba(234,179,8,.45);box-shadow:0 20px 45px -10px rgba(234,179,8,.25),inset 0 1px 1px rgba(253,224,71,.3)}
-.card-featured::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#eab308,#f59e0b,transparent);border-radius:20px 20px 0 0}
-.card-featured:hover{transform:translateY(-10px) scale(1.03);border-color:rgba(234,179,8,.8);box-shadow:0 30px 60px -10px rgba(234,179,8,.4),inset 0 1px 3px rgba(253,224,71,.5)}
+.offer-card{position:relative;overflow:hidden;background:rgba(18,19,29,.75);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-radius:22px;padding:2.2rem;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.07);box-shadow:0 12px 30px -10px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1),border-color .35s ease}
+.offer-card:hover{transform:translateY(-8px) scale(1.015);border-color:rgba(168,85,247,.45);box-shadow:0 20px 45px -10px rgba(168,85,247,.3),inset 0 1px 1px rgba(255,255,255,.15)}
+.card-featured{background:linear-gradient(160deg,rgba(28,24,46,.85),rgba(14,13,22,.9));border:1.5px solid rgba(168,85,247,.6);box-shadow:0 16px 40px -8px rgba(168,85,247,.3),inset 0 1px 0 rgba(192,132,252,.3)}
+.card-featured::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#c084fc,#a855f7,transparent);border-radius:22px 22px 0 0}
+.card-featured:hover{border-color:rgba(192,132,252,.85);box-shadow:0 24px 50px -8px rgba(168,85,247,.45)}
 .offer-badge-gold,.offer-pill{display:inline-block;align-self:flex-start;font:700 .72rem/1.2 var(--sans);letter-spacing:.8px;padding:.35rem .8rem;border-radius:50px;margin-bottom:1.2rem}
-.offer-badge-gold{color:#000;background:linear-gradient(135deg,#fef08a,#eab308);box-shadow:0 4px 12px rgba(234,179,8,.3)}
+.offer-badge-gold{color:#f3e8ff;background:rgba(168,85,247,.2);border:1px solid rgba(168,85,247,.5)} /* nom historique : la carte vedette est désormais violette */
 .offer-pill{color:#c084fc;background:rgba(168,85,247,.15)} /* #c084fc plutôt que #a855f7 : contraste ≥ 4.5:1 sur fond sombre */
 .offer-title{font:700 1.4rem/1.2 var(--sans);color:#fff;margin-bottom:.6rem}
-.offer-title-gold{color:#fef08a;text-shadow:0 0 20px rgba(234,179,8,.3)}
+.offer-title-gold{color:#f3e8ff;text-shadow:0 0 20px rgba(168,85,247,.45)}
 .offer-tagline{color:#9ca3af;font-size:.92rem;line-height:1.5;margin-bottom:1.5rem}
 .offer-features{list-style:none;padding:0;margin:0 0 2rem}
 .offer-features li{position:relative;padding-left:1.5rem;margin-bottom:.85rem;color:#e5e7eb;font-size:.95rem;line-height:1.45}
 .offer-features li::before{content:"✔";position:absolute;left:0;color:#a855f7;font-size:.85rem}
-.card-featured .offer-features li::before{color:#eab308}
+.card-featured .offer-features li::before{color:#c084fc}
 /* bouton calé en bas de carte, à hauteur égale entre les 3 offres */
 .offer-btn{display:block;margin-top:auto;text-align:center;padding:.9rem 1.2rem;border-radius:12px;font:600 .95rem/1.2 var(--sans);text-decoration:none;transition:all .25s ease}
 .btn-cycling,.btn-running{background:rgba(168,85,247,.15);color:#fff;border:1px solid rgba(168,85,247,.4)}
 .btn-cycling:hover,.btn-running:hover{background:#a855f7;color:#fff;box-shadow:0 8px 20px rgba(168,85,247,.4)}
-.btn-gold{background:linear-gradient(135deg,#f59e0b,#eab308);color:#0b0c10;box-shadow:0 8px 24px rgba(234,179,8,.35)}
-.btn-gold:hover{background:linear-gradient(135deg,#fbbf24,#f59e0b);transform:translateY(-2px);box-shadow:0 12px 30px rgba(234,179,8,.5)}
-@media (prefers-reduced-motion:reduce){.offer-card:hover,.card-featured:hover,.btn-gold:hover{transform:none}}
+.btn-gold{background:#a855f7;color:#fff;box-shadow:0 6px 18px rgba(168,85,247,.4)}
+.btn-gold:hover{background:#9333ea;transform:translateY(-2px);box-shadow:0 10px 25px rgba(168,85,247,.6)}
+@media (prefers-reduced-motion:reduce){.offer-card:hover,.card-featured:hover,.btn-gold:hover,.pole:hover{transform:none}}
 /* Contact : motif présélectionné depuis une offre partenaire (site.js) */
 .form select.is-prefilled{border-color:#a855f7;box-shadow:0 0 15px rgba(168,85,247,.4)}
 /* Frise : boutons Précédent / Suivant (site.js masque celui qui ne sert pas) + glisser à la souris */
@@ -673,3 +674,8 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan,.ribbon li{font-family:var
   .nav-dd:hover .chevron-down{transform:none}
   .nav-dd.open .chevron-down{transform:rotate(180deg)}
 }
+/* Menu : onglet actif (lien ou menu parent) en lueur néon violette + trait lumineux ; Contact (.btn) garde son contour */
+.nav a.active:not(.btn),.nav-dd-toggle.active{color:#fff;text-shadow:0 0 12px rgba(168,85,247,.6)}
+.nav a.active:not(.btn)::after,.nav-dd-toggle.active::after{left:15%;right:15%;bottom:-4px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,#c084fc,transparent);box-shadow:0 0 8px #a855f7;transform:none}
+.nav .dropdown-item.active{background:rgba(168,85,247,.18);box-shadow:inset 2px 0 #a855f7}
+@media (max-width:868px){.nav a.active:not(.btn)::after{left:0;right:auto;width:40px}}

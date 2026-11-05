@@ -58,14 +58,19 @@
 </header>
 
 <main id="contenu">
-<section class="phead">
+<!-- Fond fixe : net en haut, puis flou + voile progressifs au défilement (--b posé par site.js) -->
+<div class="backdrop" data-backdrop="500" aria-hidden="true">
+ <img class="backdrop-img" width="1920" height="1383" src="img/equipe-port.webp" alt="" fetchpriority="high">
+ <img class="backdrop-img backdrop-blur" width="1920" height="1383" src="img/equipe-port.webp" alt="">
+ <div class="backdrop-veil"></div>
+</div>
+<section class="phead phead-over">
  <div class="wrap">
   <p class="eyebrow">Qui sommes-nous</p>
   <h1 class="h-xl">Une bande de potes, une identité forte : notre maillot.</h1>
   <p class="lead">Sept pionniers, 15 licenciés FFC aujourd’hui : un collectif soudé qui roule, court et crée ensemble.</p>
  </div>
 </section>
-<div class="band band-team"><img width="1600" height="1067" src="img/equipe-mer.webp" alt="Équipe SMAL & CO au bord de mer" loading="eager"></div>
 
 <!-- ESPRIT -->
 <section class="sec">

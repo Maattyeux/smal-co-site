@@ -216,3 +216,13 @@
     dd.addEventListener('keydown', function (e) { if (e.key === 'Escape' && dd.classList.contains('open')) { set(false); btn.focus(); } });
   });
 })();
+
+// fond photo fixe (.backdrop[data-backdrop="N"]) : --b de 0 à 1 sur les N premiers px de défilement (flou + voile en CSS)
+(function () {
+  var bd = document.querySelector('[data-backdrop]');
+  if (!bd || matchMedia('(prefers-reduced-motion: reduce)').matches || document.body.classList.contains('low-bandwidth')) return;
+  var range = +bd.getAttribute('data-backdrop') || 500, ticking = false;
+  function upd() { ticking = false; bd.style.setProperty('--b', Math.min(Math.max(scrollY / range, 0), 1).toFixed(3)); }
+  addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+  upd();
+})();

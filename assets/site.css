@@ -719,3 +719,25 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 .bureau-grid-lg .bureau-name{font-size:1.25rem}
 @media (max-width:1024px){.bureau-grid-lg{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:600px){.bureau-grid-lg{grid-template-columns:1fr}}
+
+/* ===== Refonte carrée : angles stricts, bordures nettes, ombres franches ===== */
+:root{--line:rgba(255,255,255,.14);--lift:0 14px 28px -16px rgba(0,0,0,.85)}
+*,*::before,*::after{border-radius:0!important}
+.p-pin span{border-radius:50% 50% 50% 0!important} /* forme d'épingle de la carte */
+/* Boutons : rectangles, typo affirmée, survol en décalage avec ombre pleine */
+.btn{font-weight:700;text-transform:uppercase;letter-spacing:.06em;box-shadow:none}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--violet-3)}
+.btn-ghost{border-color:rgba(255,255,255,.5)}
+.btn-ghost:hover{background:#fff;color:#111;border-color:#fff;box-shadow:3px 3px 0 var(--violet-2)}
+.btn-off:hover{transform:none;box-shadow:none}
+.soc-pill:hover,.insta-badge-pill:hover,.offer-btn:hover,.btn-gold:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--violet-3)}
+/* Cartes : liseré net, survol avec ombre décalée violette */
+.card,.event,.list-cards li,.partners li,.uses li,.status-card,.offer-card,.bureau-card,.showcase-card,.media-duo-card,.story>.step,.bento-card{border-color:var(--line)}
+.card:hover,.event:hover,.list-cards li:hover,.partners li:hover,.offer-card:hover,.bureau-card:hover,.showcase-card:hover,.media-duo-card:hover,.sec-glow .card:hover{border-color:var(--violet-3);box-shadow:6px 6px 0 var(--violet)}
+/* Cartes membres (accueil + qui-sommes-nous) : grille élargie au-delà du conteneur, textes plus grands */
+.bureau-grid,.bureau-grid-lg{width:min(1440px,calc(100vw - 2rem));position:relative;left:50%;translate:-50% 0;gap:1rem}
+.bureau-content,.bureau-grid-lg .bureau-content{padding:1.8rem 1.6rem;gap:.35rem}
+.bureau-name,.bureau-grid-lg .bureau-name{font-size:clamp(1.3rem,1.8vw,1.7rem);font-weight:800;letter-spacing:-.01em}
+.bureau-role{font-size:1rem;text-transform:uppercase;letter-spacing:.06em}
+.bureau-age{font-size:.95rem}
+@media (min-width:961px){.nav a.btn{padding:10px 18px}} /* .nav a annule le padding de .btn ; l'arrondi le masquait */

@@ -77,6 +77,15 @@
 })();
 
 
+// adresse e-mail assemblée au chargement : absente du HTML, donc invisible pour les robots collecteurs
+(function () {
+  document.querySelectorAll('[data-u][data-d]').forEach(function (el) {
+    var m = el.getAttribute('data-u') + '@' + el.getAttribute('data-d');
+    if (el.hasAttribute('data-copy')) { el.setAttribute('data-copy', m); return; }
+    el.href = 'mailto:' + m; el.textContent = m;
+  });
+})();
+
 // bouton « Copier l’adresse »
 (function () {
   document.querySelectorAll('[data-copy]').forEach(function (b) {

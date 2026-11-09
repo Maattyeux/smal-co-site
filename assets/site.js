@@ -20,7 +20,12 @@
   var burger = document.querySelector('[data-burger]');
   var menu = document.getElementById('menu');
 
-  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 24); }
+  function onScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 24);
+    // barre de progression de lecture sous le menu (0 → 1), voir .top::after
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    header.style.setProperty('--sp', max > 0 ? Math.min(1, window.scrollY / max).toFixed(4) : 0);
+  }
   if (header) { onScroll(); window.addEventListener('scroll', onScroll, { passive: true }); }
 
   if (header && burger && menu) {

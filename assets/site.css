@@ -748,7 +748,9 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 :is(.event-center,.vision-objectifs,.merci,.partners-header) :is(.h-lg,.missions-title,.section-title)::after{margin-inline:auto}
 .eyebrow{display:inline-flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2em}
 .eyebrow::before{content:"";width:28px;height:3px;background:currentColor;flex:none}
-.top.scrolled{border-bottom:2px solid var(--violet-2)}
+.top.scrolled{border-bottom-color:transparent}
+/* Barre de progression de lecture : dégradé à la couleur du pôle (--bar-a → --bar-b), largeur pilotée par --sp (site.js) */
+.top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:linear-gradient(90deg,var(--bar-a,#8533b3),var(--bar-b,#a62794));transform:scaleX(var(--sp,0));transform-origin:0 50%;pointer-events:none}
 .showcase-label{font:400 clamp(1.5rem,2.2vw,2rem)/1 var(--impact);text-transform:uppercase;letter-spacing:.03em}
 .showcase-card:hover .showcase-label{color:var(--violet-3)}
 ::selection{background:var(--violet-2);color:#fff}
@@ -762,9 +764,9 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
   --c-media:#9bdb34;   --c-media-2:#3fbf5e;
 }
 /* Page d'un pôle : les accents violets pilotés par variables prennent la couleur du pôle */
-.pole-running{--violet:#9c3418;--violet-2:var(--c-running-2);--violet-3:var(--c-running);--eyebrow:var(--c-running);--pole-glow:rgba(249,78,46,.32)}
-.pole-events{--violet:#11507a;--violet-2:var(--c-events-2);--violet-3:var(--c-events);--eyebrow:var(--c-events);--pole-glow:rgba(33,143,218,.32)}
-.pole-media{--violet:#2a6b33;--violet-2:var(--c-media-2);--violet-3:var(--c-media);--eyebrow:var(--c-media);--pole-glow:rgba(63,191,94,.28)}
+.pole-running{--violet:#9c3418;--violet-2:var(--c-running-2);--violet-3:var(--c-running);--eyebrow:var(--c-running);--pole-glow:rgba(249,78,46,.32);--bar-a:var(--c-running);--bar-b:var(--c-running-2)}
+.pole-events{--violet:#11507a;--violet-2:var(--c-events-2);--violet-3:var(--c-events);--eyebrow:var(--c-events);--pole-glow:rgba(33,143,218,.32);--bar-a:var(--c-events);--bar-b:var(--c-events-2)}
+.pole-media{--violet:#2a6b33;--violet-2:var(--c-media-2);--violet-3:var(--c-media);--eyebrow:var(--c-media);--pole-glow:rgba(63,191,94,.28);--bar-a:var(--c-media);--bar-b:var(--c-media-2)}
 .pole-cycling{--violet-3:#c77dff;--eyebrow:#c77dff;--pole-glow:rgba(166,39,148,.4)}
 /* Boutons d'action : on garde le violet de marque partout (lisibilité du texte blanc) */
 :is(.pole-running,.pole-events,.pole-media) .btn:not(.btn-ghost){background:linear-gradient(135deg,#7a3ee0,#440A74)}
@@ -786,3 +788,6 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 .showcase-card[href="/communication.html"]{--pc:var(--c-media)}
 .showcase-card:hover{border-color:var(--pc)}
 .showcase-card:hover .showcase-label,.showcase-card:hover .showcase-arrow{color:var(--pc)}
+/* Panthère d'en-tête volontairement discrète : couleur fortement atténuée, pas de halo */
+.phead-panther{opacity:.22;filter:saturate(.3);animation:none} /* l animation fade (fill both) forcerait l opacité à 1 */
+@media (max-width:760px){.phead-panther{opacity:.15}}

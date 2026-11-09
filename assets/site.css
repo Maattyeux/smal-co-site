@@ -791,3 +791,18 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 /* Panthère d'en-tête volontairement discrète : couleur fortement atténuée, pas de halo */
 .phead-panther{opacity:.22;filter:saturate(.3);animation:none} /* l animation fade (fill both) forcerait l opacité à 1 */
 @media (max-width:760px){.phead-panther{opacity:.15}}
+
+/* ===== Halos d'arrière-plan par pôle : orbes très floues + fines lignes de vitesse (décoratif, sous le texte) ===== */
+.pole-running{--orb:var(--c-running-2)} .pole-cycling{--orb:var(--c-cycling-2)} .pole-events{--orb:var(--c-events-2)} .pole-media{--orb:var(--c-media-2)}
+/* les cercles viennent du radial-gradient : la refonte carrée force border-radius:0 partout */
+[class*="pole-"] .phead::before,[class*="pole-"] .band+.sec::before{content:"";position:absolute;z-index:0;pointer-events:none;background:radial-gradient(circle,var(--orb) 0,transparent 65%);filter:blur(110px)}
+[class*="pole-"] .phead::before{top:-200px;right:-140px;width:680px;height:680px;opacity:.18}
+[class*="pole-"] .phead::after{content:"";position:absolute;z-index:0;pointer-events:none;top:-10%;right:14%;width:38%;height:130%;border-inline:1px solid color-mix(in srgb,var(--orb) 22%,transparent);transform:skewX(-24deg)}
+[class*="pole-"] .phead>.wrap{z-index:1}
+[class*="pole-"] .band+.sec{position:relative;overflow:hidden}
+[class*="pole-"] .band+.sec::before{bottom:-160px;left:-180px;width:620px;height:620px;opacity:.12}
+[class*="pole-"] .band+.sec>.wrap{position:relative;z-index:1}
+/* Accueil, section des pôles : fondu croisé violet → orange → bleu */
+.missions-section{position:relative;isolation:isolate;overflow:hidden}
+.missions-section::before{content:"";position:absolute;inset:15% -10%;z-index:-1;pointer-events:none;opacity:.16;filter:blur(100px);background:radial-gradient(closest-side at 18% 55%,var(--c-cycling-2),transparent),radial-gradient(closest-side at 50% 45%,var(--c-running-2),transparent),radial-gradient(closest-side at 82% 55%,var(--c-events-2),transparent)}
+@media (prefers-reduced-transparency:reduce){[class*="pole-"] .phead::before,[class*="pole-"] .band+.sec::before,.missions-section::before{display:none}}

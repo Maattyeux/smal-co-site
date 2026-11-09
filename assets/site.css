@@ -768,26 +768,12 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 .pole-events{--violet:#11507a;--violet-2:var(--c-events-2);--violet-3:var(--c-events);--eyebrow:var(--c-events);--pole-glow:rgba(33,143,218,.32);--bar-a:var(--c-events);--bar-b:var(--c-events-2)}
 .pole-media{--violet:#2a6b33;--violet-2:var(--c-media-2);--violet-3:var(--c-media);--eyebrow:var(--c-media);--pole-glow:rgba(63,191,94,.28);--bar-a:var(--c-media);--bar-b:var(--c-media-2)}
 .pole-cycling{--violet-3:#c77dff;--eyebrow:#c77dff;--pole-glow:rgba(166,39,148,.4)}
-/* Boutons d'action : on garde le violet de marque partout (lisibilité du texte blanc) */
-:is(.pole-running,.pole-events,.pole-media) .btn:not(.btn-ghost){background:linear-gradient(135deg,#7a3ee0,#440A74)}
 /* En-tête de page : halo + panthère du pôle */
 :is(.pole-running,.pole-events,.pole-media,.pole-cycling) .phead{position:relative;overflow:hidden;background:none}
 .phead-panther{position:absolute;right:max(var(--gut),calc((100% - var(--wrap))/2));bottom:clamp(24px,4vw,56px);width:clamp(140px,22vw,300px);height:auto;pointer-events:none;filter:drop-shadow(0 0 28px var(--pole-glow));animation:fade 1.2s .2s both}
 .phead>.wrap{position:relative}
 @media (max-width:760px){.phead-panther{top:78px;bottom:auto;width:96px;opacity:.55}}
 /* Menus déroulants et cartes de l'accueil : repère couleur par pôle */
-.nav .dropdown-item{border-left:3px solid transparent;--pc:var(--violet-3)}
-.dropdown-item .dropdown-item-badge{color:var(--pc)}
-.dropdown-item[href="/cyclisme.html"]{--pc:#c77dff;border-left-color:var(--c-cycling-2)}
-.dropdown-item[href="/running.html"]{--pc:var(--c-running);border-left-color:var(--c-running)}
-.dropdown-item[href="/evenements.html"]{--pc:var(--c-events);border-left-color:var(--c-events)}
-.dropdown-item[href="/communication.html"]{--pc:var(--c-media);border-left-color:var(--c-media)}
-.showcase-card{--pc:var(--violet-3)}
-.showcase-card[href="/running.html"]{--pc:var(--c-running)}
-.showcase-card[href="/evenements.html"]{--pc:var(--c-events)}
-.showcase-card[href="/communication.html"]{--pc:var(--c-media)}
-.showcase-card:hover{border-color:var(--pc)}
-.showcase-card:hover .showcase-label,.showcase-card:hover .showcase-arrow{color:var(--pc)}
 /* Panthère d'en-tête volontairement discrète : couleur fortement atténuée, pas de halo */
 .phead-panther{opacity:.22;filter:saturate(.3);animation:none} /* l animation fade (fill both) forcerait l opacité à 1 */
 @media (max-width:760px){.phead-panther{opacity:.15}}
@@ -809,3 +795,22 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 [class*="pole-"] .phead::after{content:"";position:absolute;z-index:0;pointer-events:none;top:-10%;right:14%;width:38%;height:130%;border-inline:1px solid color-mix(in srgb,var(--violet-3) 22%,transparent);transform:skewX(-24deg)}
 [class*="pole-"] .phead>.wrap{z-index:1}
 @media (prefers-reduced-transparency:reduce){body::before{display:none}}
+/* ===== Identité fixe par pôle sur les liens et boutons : mauve institutionnel → couleur du pôle, quelle que soit la page ===== */
+/* le menu et les boutons ignorent la couleur de la page (pole-*) et reprennent les valeurs de marque */
+.top,.btn{--violet:#440A74;--violet-2:#7a3ee0;--violet-3:#b794ff;--eyebrow:#a855f7}
+/* repérage par lien (href) : pas de classe à ajouter dans les 11 pages */
+a[href^="/cyclisme"]{--btn-gradient:linear-gradient(135deg,#8b24d6 0%,#581c87 100%);--accent-color:#8b24d6}
+a[href^="/running"]{--btn-gradient:linear-gradient(135deg,#8b24d6 0%,#ff5e14 100%);--accent-color:#ff5e14}
+a[href^="/evenements"]{--btn-gradient:linear-gradient(135deg,#8b24d6 0%,#00b4d8 100%);--accent-color:#00b4d8}
+a[href^="/boutique"]{--btn-gradient:linear-gradient(135deg,#8b24d6 0%,#ffb703 100%);--accent-color:#ffb703}
+a[href^="/communication"]{--btn-gradient:linear-gradient(135deg,#8b24d6 0%,#10b981 100%);--accent-color:#10b981}
+/* Boutons */
+.btn:not(.btn-ghost){background:var(--btn-gradient,linear-gradient(135deg,#7a3ee0,#440A74))}
+.btn:hover{box-shadow:3px 3px 0 var(--accent-color,#b794ff)}
+.btn-ghost:hover{box-shadow:3px 3px 0 var(--accent-color,#7a3ee0)}
+/* Menus déroulants : liseré en dégradé et badge éclairci pour rester lisible sur fond sombre */
+.nav .dropdown-item{border-left:3px solid transparent;border-image:linear-gradient(180deg,#8b24d6,var(--accent-color,#8b24d6)) 1}
+.dropdown-item .dropdown-item-badge{color:color-mix(in srgb,var(--accent-color,#b794ff) 70%,#fff)}
+/* Cartes des pôles (accueil) */
+.showcase-card:hover{border-color:var(--accent-color,#b794ff)}
+.showcase-card:hover .showcase-label,.showcase-card:hover .showcase-arrow{color:color-mix(in srgb,var(--accent-color,#b794ff) 70%,#fff)}

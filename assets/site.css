@@ -741,3 +741,14 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 .bureau-role{font-size:1rem;text-transform:uppercase;letter-spacing:.06em}
 .bureau-age{font-size:.95rem}
 @media (min-width:961px){.nav a.btn{padding:10px 18px}} /* .nav a annule le padding de .btn ; l'arrondi le masquait */
+
+/* ===== Refonte percutante : titres en capitales, accents violets nets ===== */
+.h-xl,.h-lg,.missions-title,.partners-main-title,.section-title,.hero-slogan{text-transform:uppercase;letter-spacing:.01em;line-height:.98}
+.h-lg::after,.missions-title::after,.section-title::after{content:"";display:block;width:64px;height:6px;margin-top:.4em;background:var(--violet-2)}
+:is(.event-center,.vision-objectifs,.merci,.partners-header) :is(.h-lg,.missions-title,.section-title)::after{margin-inline:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2em}
+.eyebrow::before{content:"";width:28px;height:3px;background:currentColor;flex:none}
+.top.scrolled{border-bottom:2px solid var(--violet-2)}
+.showcase-label{font:400 clamp(1.5rem,2.2vw,2rem)/1 var(--impact);text-transform:uppercase;letter-spacing:.03em}
+.showcase-card:hover .showcase-label{color:var(--violet-3)}
+::selection{background:var(--violet-2);color:#fff}

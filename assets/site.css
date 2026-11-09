@@ -724,16 +724,12 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 :root{--line:rgba(255,255,255,.14);--lift:0 14px 28px -16px rgba(0,0,0,.85)}
 *,*::before,*::after{border-radius:0!important}
 .p-pin span{border-radius:50% 50% 50% 0!important} /* forme d'épingle de la carte */
-/* Boutons : rectangles, typo affirmée, survol en décalage avec ombre pleine */
-.btn{font-weight:700;text-transform:uppercase;letter-spacing:.06em;box-shadow:none}
-.btn:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--violet-3)}
+/* Boutons : rectangles nets, sans ombre ; couleurs dans le système visuel plus bas */
+.btn{font-weight:700;text-transform:uppercase;letter-spacing:.08em;box-shadow:none}
 .btn-ghost{border-color:rgba(255,255,255,.5)}
-.btn-ghost:hover{background:#fff;color:#111;border-color:#fff;box-shadow:3px 3px 0 var(--violet-2)}
-.btn-off:hover{transform:none;box-shadow:none}
-.soc-pill:hover,.insta-badge-pill:hover,.offer-btn:hover,.btn-gold:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--violet-3)}
-/* Cartes : liseré net, survol avec ombre décalée violette */
+/* Cartes : liseré net ; au survol la bordure s'éclaire, sans ombre ni décalage */
 .card,.event,.list-cards li,.partners li,.uses li,.status-card,.offer-card,.bureau-card,.showcase-card,.media-duo-card,.story>.step,.bento-card{border-color:var(--line)}
-.card:hover,.event:hover,.list-cards li:hover,.partners li:hover,.offer-card:hover,.bureau-card:hover,.showcase-card:hover,.media-duo-card:hover,.sec-glow .card:hover{border-color:var(--violet-3);box-shadow:6px 6px 0 var(--violet)}
+.card:hover,.event:hover,.list-cards li:hover,.partners li:hover,.offer-card:hover,.bureau-card:hover,.showcase-card:hover,.media-duo-card:hover,.sec-glow .card:hover{border-color:rgba(255,255,255,.45)}
 /* Cartes membres (accueil + qui-sommes-nous) : grille élargie au-delà du conteneur, textes plus grands */
 .bureau-grid,.bureau-grid-lg{width:min(1440px,calc(100vw - 2rem));position:relative;left:50%;translate:-50% 0;gap:1rem}
 .bureau-content,.bureau-grid-lg .bureau-content{padding:1.8rem 1.6rem;gap:.35rem}
@@ -742,75 +738,59 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 .bureau-age{font-size:.95rem}
 @media (min-width:961px){.nav a.btn{padding:10px 18px}} /* .nav a annule le padding de .btn ; l'arrondi le masquait */
 
-/* ===== Refonte percutante : titres en capitales, accents violets nets ===== */
-.h-xl,.h-lg,.missions-title,.partners-main-title,.section-title,.hero-slogan{text-transform:uppercase;letter-spacing:.01em;line-height:.98}
-.h-lg::after,.missions-title::after,.section-title::after{content:"";display:block;width:64px;height:6px;margin-top:.4em;background:var(--violet-2)}
-:is(.event-center,.vision-objectifs,.merci,.partners-header) :is(.h-lg,.missions-title,.section-title)::after{margin-inline:auto}
-.eyebrow{display:inline-flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2em}
-.eyebrow::before{content:"";width:28px;height:3px;background:currentColor;flex:none}
-.top.scrolled{border-bottom-color:transparent}
-/* Barre de progression de lecture : dégradé à la couleur du pôle (--bar-a → --bar-b), largeur pilotée par --sp (site.js) */
-.top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:linear-gradient(90deg,var(--bar-a,#8533b3),var(--bar-b,#a62794));transform:scaleX(var(--sp,0));transform-origin:0 50%;pointer-events:none}
-.showcase-label{font:400 clamp(1.5rem,2.2vw,2rem)/1 var(--impact);text-transform:uppercase;letter-spacing:.03em}
-.showcase-card:hover .showcase-label{color:var(--violet-3)}
-::selection{background:var(--violet-2);color:#fff}
-
-/* ===== DA réseaux : une couleur par pôle (relevées sur les templates Instagram, début → fin du trait de pinceau) ===== */
+/* ===== Système visuel : base noir & blanc, un seul accent par page =====
+   Principe (Rapha, Pas Normal Studios, Apple) : la couleur est rare, donc elle compte.
+   - mauve SMAL & CO = accent par défaut ; sur une page de pôle, la couleur du pôle le remplace
+   - les couleurs des autres pôles n'apparaissent que comme petits repères carrés
+   - pas de dégradés, de halos ni d'ombres lumineuses : relief par bordures et typographie */
 :root{
-  --c-cycling:#8533b3; --c-cycling-2:#a62794;
-  --c-running:#f77d2d; --c-running-2:#f94e2e;
-  --c-events:#16c7bd;  --c-events-2:#218fda;
-  --c-shop:#f5c83e;    --c-shop-2:#f9a222;
-  --c-media:#9bdb34;   --c-media-2:#3fbf5e;
+  --bg:#0b0b0d; --bg-2:#111114; --panel:#141417; --text:#e9e9ec; --muted:#a1a1aa; --line:rgba(255,255,255,.12);
+  --c-cycling:#a66bff; --c-running:#ff5e14; --c-events:#00b4d8; --c-shop:#ffb703; --c-media:#10b981;
+  --accent:var(--c-cycling); --violet:#5b21b6; --violet-2:var(--accent); --violet-3:var(--accent); --eyebrow:var(--muted);
 }
-/* Page d'un pôle : les accents violets pilotés par variables prennent la couleur du pôle */
-.pole-running{--violet:#9c3418;--violet-2:var(--c-running-2);--violet-3:var(--c-running);--eyebrow:var(--c-running);--pole-glow:rgba(249,78,46,.32);--bar-a:var(--c-running);--bar-b:var(--c-running-2)}
-.pole-events{--violet:#11507a;--violet-2:var(--c-events-2);--violet-3:var(--c-events);--eyebrow:var(--c-events);--pole-glow:rgba(33,143,218,.32);--bar-a:var(--c-events);--bar-b:var(--c-events-2)}
-.pole-media{--violet:#2a6b33;--violet-2:var(--c-media-2);--violet-3:var(--c-media);--eyebrow:var(--c-media);--pole-glow:rgba(63,191,94,.28);--bar-a:var(--c-media);--bar-b:var(--c-media-2)}
-.pole-cycling{--violet-3:#c77dff;--eyebrow:#c77dff;--pole-glow:rgba(166,39,148,.4)}
-/* En-tête de page : halo + panthère du pôle */
-:is(.pole-running,.pole-events,.pole-media,.pole-cycling) .phead{position:relative;overflow:hidden;background:none}
-.phead-panther{position:absolute;right:max(var(--gut),calc((100% - var(--wrap))/2));bottom:clamp(24px,4vw,56px);width:clamp(140px,22vw,300px);height:auto;pointer-events:none;filter:drop-shadow(0 0 28px var(--pole-glow));animation:fade 1.2s .2s both}
-.phead>.wrap{position:relative}
-@media (max-width:760px){.phead-panther{top:78px;bottom:auto;width:96px;opacity:.55}}
-/* Menus déroulants et cartes de l'accueil : repère couleur par pôle */
-/* Panthère d'en-tête volontairement discrète : couleur fortement atténuée, pas de halo */
-.phead-panther{opacity:.22;filter:saturate(.3);animation:none} /* l animation fade (fill both) forcerait l opacité à 1 */
-@media (max-width:760px){.phead-panther{opacity:.15}}
-
-/* ===== Fond d'ambiance global : lueurs fixées à l'écran, continues au défilement (remplacent les halos par section) ===== */
-:root{--ambient:radial-gradient(circle at 85% 15%,#8b24d6 0%,transparent 55%),radial-gradient(circle at 10% 80%,#581c87 0%,transparent 50%)}
-.pole-running{--ambient:radial-gradient(circle at 80% 20%,#ff5e14 0%,transparent 55%),radial-gradient(circle at 15% 75%,#ff3b00 0%,transparent 50%)}
-.pole-events{--ambient:radial-gradient(circle at 80% 20%,#16c7bd 0%,transparent 55%),radial-gradient(circle at 15% 75%,#218fda 0%,transparent 50%)}
-.pole-media{--ambient:radial-gradient(circle at 80% 20%,#9bdb34 0%,transparent 55%),radial-gradient(circle at 15% 75%,#3fbf5e 0%,transparent 50%)}
-/* z-index:-1 : peint au-dessus du fond de la page mais sous tout le contenu, sans toucher au positionnement du menu fixe */
-body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--ambient);opacity:.10}
-/* Sections à fond plein rendues transparentes : l ambiance passe partout, sans cassure */
-.phead{background:none}
-.sec-alt,.foot{background:none}
-.sec-alt{border-block-color:transparent}
-.numbers{background:none}
-.cta-final{background:none}
-/* Lignes de vitesse fines dans l'en-tête des pôles */
-[class*="pole-"] .phead::after{content:"";position:absolute;z-index:0;pointer-events:none;top:-10%;right:14%;width:38%;height:130%;border-inline:1px solid color-mix(in srgb,var(--violet-3) 22%,transparent);transform:skewX(-24deg)}
-[class*="pole-"] .phead>.wrap{z-index:1}
+.pole-cycling{--accent:var(--c-cycling)} .pole-running{--accent:var(--c-running)} .pole-events{--accent:var(--c-events)} .pole-media{--accent:var(--c-media)}
+[class*="pole-"]{--violet-2:var(--accent);--violet-3:var(--accent)}
+a[href^="/cyclisme"]{--pc:var(--c-cycling)} a[href^="/running"]{--pc:var(--c-running)} a[href^="/evenements"]{--pc:var(--c-events)}
+a[href^="/boutique"]{--pc:var(--c-shop)} a[href^="/communication"]{--pc:var(--c-media)}
+*,*::before,*::after{box-shadow:none!important}
+::selection{background:var(--accent);color:#fff}
+/* Fond : uni, avec une seule lueur très faible en haut, fixée à l'écran */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(1100px 600px at 85% -10%,var(--accent),transparent 70%);opacity:.07}
 @media (prefers-reduced-transparency:reduce){body::before{display:none}}
-/* ===== Identité fixe par pôle sur les liens et boutons : mauve institutionnel → couleur du pôle, quelle que soit la page ===== */
-/* le menu et les boutons ignorent la couleur de la page (pole-*) et reprennent les valeurs de marque */
-.top,.btn{--violet:#440A74;--violet-2:#7a3ee0;--violet-3:#b794ff;--eyebrow:#a855f7}
-/* repérage par lien (href) : pas de classe à ajouter dans les 11 pages */
-a[href^="/cyclisme"]{--btn-gradient:linear-gradient(135deg,#8b24d6 0%,#581c87 100%);--accent-color:#8b24d6}
-a[href^="/running"]{--btn-gradient:linear-gradient(135deg,#8b24d6 0%,#ff5e14 100%);--accent-color:#ff5e14}
-a[href^="/evenements"]{--btn-gradient:linear-gradient(135deg,#8b24d6 0%,#00b4d8 100%);--accent-color:#00b4d8}
-a[href^="/boutique"]{--btn-gradient:linear-gradient(135deg,#8b24d6 0%,#ffb703 100%);--accent-color:#ffb703}
-a[href^="/communication"]{--btn-gradient:linear-gradient(135deg,#8b24d6 0%,#10b981 100%);--accent-color:#10b981}
-/* Boutons */
-.btn:not(.btn-ghost){background:var(--btn-gradient,linear-gradient(135deg,#7a3ee0,#440A74))}
-.btn:hover{box-shadow:3px 3px 0 var(--accent-color,#b794ff)}
-.btn-ghost:hover{box-shadow:3px 3px 0 var(--accent-color,#7a3ee0)}
-/* Menus déroulants : liseré en dégradé et badge éclairci pour rester lisible sur fond sombre */
-.nav .dropdown-item{border-left:3px solid transparent;border-image:linear-gradient(180deg,#8b24d6,var(--accent-color,#8b24d6)) 1}
-.dropdown-item .dropdown-item-badge{color:color-mix(in srgb,var(--accent-color,#b794ff) 70%,#fff)}
-/* Cartes des pôles (accueil) */
-.showcase-card:hover{border-color:var(--accent-color,#b794ff)}
-.showcase-card:hover .showcase-label,.showcase-card:hover .showcase-arrow{color:color-mix(in srgb,var(--accent-color,#b794ff) 70%,#fff)}
+.phead,.numbers,.cta-final,.sec-glow{background:none}
+.sec-alt{background:none;border-block-color:var(--line)}
+.foot{background:var(--bg-2)}
+/* Titres */
+.h-xl,.h-lg,.missions-title,.partners-main-title,.section-title,.hero-slogan{text-transform:uppercase;letter-spacing:.01em;line-height:.98}
+.hero-slogan{background:none;color:#fff}
+.hero-mark img{filter:none}
+.h-lg::after,.missions-title::after,.section-title::after{content:"";display:block;width:40px;height:2px;margin-top:.6em;background:var(--accent)}
+:is(.event-center,.vision-objectifs,.merci,.partners-header) :is(.h-lg,.missions-title,.section-title)::after{margin-inline:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.22em;color:var(--muted)}
+.eyebrow::before{content:"";width:8px;height:8px;background:var(--accent);flex:none}
+/* Boutons : blanc plein (principal) ou contour blanc (secondaire) ; l'accent n'apparaît qu'au survol */
+.btn:not(.btn-ghost){background:#fff;color:#0b0b0d;border-color:#fff}
+.btn:not(.btn-ghost):hover{background:var(--accent);border-color:var(--accent);color:#fff;transform:none}
+.btn-ghost{color:#fff}
+.btn-ghost:hover{background:#fff;color:#0b0b0d;border-color:#fff;transform:none}
+.soc-pill:hover,.insta-badge-pill:hover,.offer-btn:hover,.btn-gold:hover{transform:none}
+/* Menu : neutre, souligné blanc ; barre de progression fine à la couleur de la page (largeur pilotée par --sp, site.js) */
+.top.scrolled{background:rgba(11,11,13,.85);border-bottom-color:var(--line)}
+.top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--accent);transform:scaleX(var(--sp,0));transform-origin:0 50%;pointer-events:none}
+.nav a:not(.btn)::after,.nav-dd-toggle.active::after,.nav a.active:not(.btn)::after{background:#fff}
+.nav a.btn:not(.btn-ghost){color:#0b0b0d}
+.nav a.btn:not(.btn-ghost):hover{color:#fff}
+.chevron-down{color:var(--muted)}
+.dropdown-menu{background:var(--bg-2);border:1px solid var(--line)}
+.nav .dropdown-item:hover,.nav .dropdown-item.active{background:rgba(255,255,255,.06)}
+.dropdown-item-badge{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.dropdown-item-badge::before{content:"";width:6px;height:6px;background:var(--pc,var(--accent));flex:none}
+/* Cartes des pôles (accueil) : repère carré à la couleur du pôle, survol en blanc */
+.showcase-label{display:inline-flex;align-items:center;gap:12px;font:400 clamp(1.5rem,2.2vw,2rem)/1 var(--impact);text-transform:uppercase;letter-spacing:.03em}
+.showcase-label::before{content:"";width:10px;height:10px;background:var(--pc,var(--accent));flex:none}
+.showcase-card:hover .showcase-label,.showcase-card:hover .showcase-arrow{color:#fff}
+/* En-tête des pôles : panthère en filigrane monochrome */
+:is(.pole-running,.pole-events,.pole-media,.pole-cycling) .phead{position:relative;overflow:hidden}
+.phead>.wrap{position:relative;z-index:1}
+.phead-panther{position:absolute;right:max(var(--gut),calc((100% - var(--wrap))/2));bottom:clamp(24px,4vw,56px);width:clamp(140px,22vw,300px);height:auto;pointer-events:none;opacity:.08;filter:grayscale(1);animation:none}
+@media (max-width:760px){.phead-panther{top:78px;bottom:auto;width:96px;opacity:.06}}

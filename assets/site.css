@@ -771,7 +771,7 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 /* Boutons d'action : on garde le violet de marque partout (lisibilité du texte blanc) */
 :is(.pole-running,.pole-events,.pole-media) .btn:not(.btn-ghost){background:linear-gradient(135deg,#7a3ee0,#440A74)}
 /* En-tête de page : halo + panthère du pôle */
-:is(.pole-running,.pole-events,.pole-media,.pole-cycling) .phead{position:relative;overflow:hidden;background:radial-gradient(900px 420px at 85% 0%,var(--pole-glow),transparent 70%)}
+:is(.pole-running,.pole-events,.pole-media,.pole-cycling) .phead{position:relative;overflow:hidden;background:none}
 .phead-panther{position:absolute;right:max(var(--gut),calc((100% - var(--wrap))/2));bottom:clamp(24px,4vw,56px);width:clamp(140px,22vw,300px);height:auto;pointer-events:none;filter:drop-shadow(0 0 28px var(--pole-glow));animation:fade 1.2s .2s both}
 .phead>.wrap{position:relative}
 @media (max-width:760px){.phead-panther{top:78px;bottom:auto;width:96px;opacity:.55}}
@@ -792,17 +792,20 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 .phead-panther{opacity:.22;filter:saturate(.3);animation:none} /* l animation fade (fill both) forcerait l opacité à 1 */
 @media (max-width:760px){.phead-panther{opacity:.15}}
 
-/* ===== Halos d'arrière-plan par pôle : orbes très floues + fines lignes de vitesse (décoratif, sous le texte) ===== */
-.pole-running{--orb:var(--c-running-2)} .pole-cycling{--orb:var(--c-cycling-2)} .pole-events{--orb:var(--c-events-2)} .pole-media{--orb:var(--c-media-2)}
-/* les cercles viennent du radial-gradient : la refonte carrée force border-radius:0 partout */
-[class*="pole-"] .phead::before,[class*="pole-"] .band+.sec::before{content:"";position:absolute;z-index:0;pointer-events:none;background:radial-gradient(circle,var(--orb) 0,transparent 65%);filter:blur(110px)}
-[class*="pole-"] .phead::before{top:-200px;right:-140px;width:680px;height:680px;opacity:.18}
-[class*="pole-"] .phead::after{content:"";position:absolute;z-index:0;pointer-events:none;top:-10%;right:14%;width:38%;height:130%;border-inline:1px solid color-mix(in srgb,var(--orb) 22%,transparent);transform:skewX(-24deg)}
+/* ===== Fond d'ambiance global : lueurs fixées à l'écran, continues au défilement (remplacent les halos par section) ===== */
+:root{--ambient:radial-gradient(circle at 85% 15%,#8b24d6 0%,transparent 55%),radial-gradient(circle at 10% 80%,#581c87 0%,transparent 50%)}
+.pole-running{--ambient:radial-gradient(circle at 80% 20%,#ff5e14 0%,transparent 55%),radial-gradient(circle at 15% 75%,#ff3b00 0%,transparent 50%)}
+.pole-events{--ambient:radial-gradient(circle at 80% 20%,#16c7bd 0%,transparent 55%),radial-gradient(circle at 15% 75%,#218fda 0%,transparent 50%)}
+.pole-media{--ambient:radial-gradient(circle at 80% 20%,#9bdb34 0%,transparent 55%),radial-gradient(circle at 15% 75%,#3fbf5e 0%,transparent 50%)}
+/* z-index:-1 : peint au-dessus du fond de la page mais sous tout le contenu, sans toucher au positionnement du menu fixe */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--ambient);opacity:.10}
+/* Sections à fond plein rendues transparentes : l ambiance passe partout, sans cassure */
+.phead{background:none}
+.sec-alt,.foot{background:none}
+.sec-alt{border-block-color:transparent}
+.numbers{background:none}
+.cta-final{background:none}
+/* Lignes de vitesse fines dans l'en-tête des pôles */
+[class*="pole-"] .phead::after{content:"";position:absolute;z-index:0;pointer-events:none;top:-10%;right:14%;width:38%;height:130%;border-inline:1px solid color-mix(in srgb,var(--violet-3) 22%,transparent);transform:skewX(-24deg)}
 [class*="pole-"] .phead>.wrap{z-index:1}
-[class*="pole-"] .band+.sec{position:relative;overflow:hidden}
-[class*="pole-"] .band+.sec::before{bottom:-160px;left:-180px;width:620px;height:620px;opacity:.12}
-[class*="pole-"] .band+.sec>.wrap{position:relative;z-index:1}
-/* Accueil, section des pôles : fondu croisé violet → orange → bleu */
-.missions-section{position:relative;isolation:isolate;overflow:hidden}
-.missions-section::before{content:"";position:absolute;inset:15% -10%;z-index:-1;pointer-events:none;opacity:.16;filter:blur(100px);background:radial-gradient(closest-side at 18% 55%,var(--c-cycling-2),transparent),radial-gradient(closest-side at 50% 45%,var(--c-running-2),transparent),radial-gradient(closest-side at 82% 55%,var(--c-events-2),transparent)}
-@media (prefers-reduced-transparency:reduce){[class*="pole-"] .phead::before,[class*="pole-"] .band+.sec::before,.missions-section::before{display:none}}
+@media (prefers-reduced-transparency:reduce){body::before{display:none}}

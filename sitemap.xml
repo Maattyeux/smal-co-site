@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO: remplacer [DOMAINE] par le domaine définitif -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://[DOMAINE]/</loc></url>
-  <url><loc>https://[DOMAINE]/qui-sommes-nous.html</loc></url>
-  <url><loc>https://[DOMAINE]/cyclisme.html</loc></url>
-  <url><loc>https://[DOMAINE]/running.html</loc></url>
-  <url><loc>https://[DOMAINE]/evenements.html</loc></url>
-  <url><loc>https://[DOMAINE]/communication.html</loc></url>
-  <url><loc>https://[DOMAINE]/partenaires.html</loc></url>
-  <url><loc>https://[DOMAINE]/contact.html</loc></url>
-  <url><loc>https://[DOMAINE]/mentions-legales.html</loc></url>
+  <url><loc>https://smal-co-web.netlify.app/</loc></url>
+  <url><loc>https://smal-co-web.netlify.app/qui-sommes-nous.html</loc></url>
+  <url><loc>https://smal-co-web.netlify.app/cyclisme.html</loc></url>
+  <url><loc>https://smal-co-web.netlify.app/running.html</loc></url>
+  <url><loc>https://smal-co-web.netlify.app/evenements.html</loc></url>
+  <url><loc>https://smal-co-web.netlify.app/communication.html</loc></url>
+  <url><loc>https://smal-co-web.netlify.app/partenaires.html</loc></url>
+  <url><loc>https://smal-co-web.netlify.app/contact.html</loc></url>
+  <url><loc>https://smal-co-web.netlify.app/mentions-legales.html</loc></url>
 </urlset>

@@ -3,6 +3,7 @@
 #   document.documentElement.classList.add('js')   -> si vous le modifiez, recalculez le sha256 ci-dessous.
 # 'unsafe-inline' reste nécessaire pour les styles (attributs style="--d:80ms" dans le HTML), pas pour les scripts.
 /*
+  X-Robots-Tag: noindex, nofollow
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin

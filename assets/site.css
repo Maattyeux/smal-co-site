@@ -794,3 +794,4 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .phead>.wrap{position:relative;z-index:1}
 .phead-panther{position:absolute;right:max(var(--gut),calc((100% - var(--wrap))/2));bottom:clamp(24px,4vw,56px);width:clamp(140px,22vw,300px);height:auto;pointer-events:none;opacity:.08;filter:grayscale(1);animation:none}
 @media (max-width:760px){.phead-panther{top:78px;bottom:auto;width:96px;opacity:.06}}
+.foot-legal{display:flex;flex-wrap:wrap;gap:8px 24px}

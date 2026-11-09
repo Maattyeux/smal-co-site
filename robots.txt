@@ -1,5 +1,3 @@
-# TODO: remplacer [DOMAINE] par le domaine définitif
+# Site réservé aux partenaires : aucune indexation par les moteurs de recherche
 User-agent: *
-Allow: /
-
-Sitemap: https://[DOMAINE]/sitemap.xml
+Disallow: /

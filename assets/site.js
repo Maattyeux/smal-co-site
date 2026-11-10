@@ -229,3 +229,30 @@
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
   upd();
 })();
+
+// formulaire de contact : envoi Netlify en fetch puis animation de succès ; en cas d'échec, envoi classique vers /merci.html (aucun message perdu)
+(function () {
+  var form = document.querySelector('form[name="contact"]'), ok = document.querySelector('[data-success]');
+  if (!form || !ok || !window.fetch) return;
+  var btn = form.querySelector('[type=submit]');
+  form.addEventListener('submit', function (e) {
+    var captcha = form.querySelector('[name="g-recaptcha-response"]');
+    if (captcha && !captcha.value) return; // reCAPTCHA non coché : on laisse Netlify gérer en envoi classique
+    e.preventDefault();
+    btn.disabled = true; btn.textContent = 'Envoi…';
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
+      .then(function (r) {
+        if (!r.ok) throw r;
+        form.reset(); form.hidden = true; ok.hidden = false;
+        ok.querySelector('.success-title').focus({ preventScroll: true });
+        ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch(function () { form.submit(); })
+      .then(function () { btn.disabled = false; btn.textContent = 'Envoyer'; });
+  });
+  ok.querySelector('[data-success-reset]').addEventListener('click', function () {
+    if (window.grecaptcha) try { grecaptcha.reset(); } catch (err) {}
+    ok.hidden = true; form.hidden = false;
+    form.querySelector('[name=nom]').focus();
+  });
+})();

@@ -795,3 +795,20 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .phead-panther{position:absolute;right:max(var(--gut),calc((100% - var(--wrap))/2));bottom:clamp(24px,4vw,56px);width:clamp(140px,22vw,300px);height:auto;pointer-events:none;opacity:.08;filter:grayscale(1);animation:none}
 @media (max-width:760px){.phead-panther{top:78px;bottom:auto;width:96px;opacity:.06}}
 .foot-legal{display:flex;flex-wrap:wrap;gap:8px 24px}
+
+/* Contact : état de succès (cycliste qui s'élance, traînée mauve → orange). État de repos = visible, pour prefers-reduced-motion */
+.form[hidden],.success[hidden]{display:none}
+.success{align-items:stretch;text-align:center;overflow:hidden}
+.success-bike-anim{position:relative;height:120px;color:var(--violet-3)}
+.success-bike{position:absolute;left:50%;bottom:6px;margin-left:-90px;overflow:visible;animation:bike-ride 2.4s cubic-bezier(.45,0,.55,1) both}
+.success-wheel{transform-box:fill-box;transform-origin:center;animation:spin .35s linear infinite}
+.success-trail{filter:drop-shadow(0 0 6px #ff7a1a);transform-box:fill-box;transform-origin:right;animation:trail 2.4s ease-in both}
+.success-ground{position:absolute;left:0;right:0;bottom:6px;height:2px;background:repeating-linear-gradient(90deg,var(--violet-2) 0 24px,transparent 24px 40px);opacity:.6;animation:ground .4s linear infinite}
+.success-message{display:grid;gap:14px;justify-items:center;animation:fadeInUp .7s 1.3s var(--ease) both}
+.success-title:focus{outline:none}
+.success-title{background:linear-gradient(90deg,var(--violet-3),#ff7a1a);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.02em}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bike-ride{0%{transform:translateX(-90vw)}45%,60%{transform:none}100%{transform:translateX(90vw)}}
+@keyframes trail{0%,30%{opacity:0;transform:scaleX(.2)}55%{opacity:.8;transform:scaleX(.6)}100%{opacity:1;transform:scaleX(1.4)}}
+@keyframes ground{to{background-position:-40px 0}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}

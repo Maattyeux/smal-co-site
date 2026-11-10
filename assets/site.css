@@ -958,20 +958,15 @@ h1,h2,h3,h4,.hero-title,.showcase-label,.story .step-txt time{font-family:var(--
 .showcase-label{font-size:clamp(1.3rem,1.8vw,1.8rem)} /* Impact est plus large : « Communication » garde de l’air avant la flèche */
 /* hero d'accueil épuré : seulement la marque et le slogan, en bas à gauche, la photo respire */
 .hero-logo .hero-shade{background:linear-gradient(0deg,rgba(8,8,10,.75) 0%,rgba(8,8,10,.25) 28%,rgba(8,8,10,0) 50%),linear-gradient(180deg,rgba(8,8,10,.5),transparent 22%)}
-/* hero d'accueil : logo, slogan dont « oser » porte l'élan, puis les quatre pôles en filets de couleur qui se tracent
-   un à un (une équipe, quatre terrains) ; une invitation discrète à descendre en bas à droite */
+/* hero d'accueil : logo, slogan en Impact argenté souligné d'une barre mauve, invitation discrète à descendre en bas à droite */
 .hero-logo .hero-shade{background:linear-gradient(0deg,rgba(8,8,10,.85) 0%,rgba(8,8,10,.35) 30%,rgba(8,8,10,0) 55%),linear-gradient(90deg,rgba(8,8,10,.45) 0%,rgba(8,8,10,0) 50%),linear-gradient(180deg,rgba(8,8,10,.5),transparent 22%)}
 .hero-brand-wrap{display:flex;flex-direction:column;align-items:flex-start;text-align:left}
 .hero-brand-logo{margin:0;line-height:0}
 .hero-brand-logo img{width:clamp(280px,46vw,700px);height:auto;filter:drop-shadow(0 8px 30px rgba(0,0,0,.45));animation:hero-in 1s .1s var(--ease) both}
-.hero-brand-subtitle{margin:clamp(18px,2.4vw,30px) 0 0;font:400 clamp(1.6rem,3vw,2.8rem)/1 var(--impact);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72);text-shadow:0 4px 15px rgba(0,0,0,.5)}
-.hero-brand-subtitle .w{display:inline-block;animation:hero-in .7s calc(.45s + var(--i)*.12s) var(--ease) both}
-.hero-oser{color:#fff}
-.hero-poles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;width:min(100%,560px);margin-top:clamp(22px,3vw,34px)}
-.hero-poles a{position:relative;padding-top:14px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;transition:color .15s var(--ease);animation:hero-fade .5s calc(1.05s + var(--i)*.12s) var(--ease) both}
-.hero-poles a::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--pc);transform-origin:0 50%;transition:height .15s var(--ease);animation:hero-draw .6s calc(.95s + var(--i)*.12s) var(--ease) both}
-.hero-poles a:hover,.hero-poles a:focus-visible{color:#fff}
-.hero-poles a:hover::before{height:5px}
+.hero-brand-subtitle{margin:clamp(18px,2.4vw,30px) 0 0;font:400 clamp(1.8rem,3.4vw,3.2rem)/1 var(--impact);letter-spacing:.1em;text-transform:uppercase;color:#d4d4d8}
+/* argent brossé : reflet clair en haut, creux gris au milieu, remontée en bas ; l'ombre passe par filter (text-shadow masquerait le dégradé) */
+.hero-brand-subtitle .w{display:inline-block;background:linear-gradient(180deg,#ffffff 0%,#e4e4e7 38%,#9ca3af 52%,#d4d4d8 70%,#f4f4f5 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 14px rgba(0,0,0,.55));animation:hero-in .7s calc(.45s + var(--i)*.12s) var(--ease) both}
+.hero-bar{display:block;width:72px;height:4px;margin-top:clamp(16px,2vw,22px);background:var(--c-cycling);transform-origin:0 50%;animation:hero-draw .6s 1s var(--ease) both}
 .scroll-cue{display:none}
 .hero-next{position:absolute;right:max(var(--gut),calc((100% - var(--wrap))/2 + var(--gut)));bottom:clamp(28px,5vh,48px);display:flex;flex-direction:column;align-items:center;gap:14px;font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.75);text-decoration:none;animation:hero-fade .6s 1.6s var(--ease) both}
 .hero-next span{writing-mode:vertical-rl}
@@ -982,4 +977,4 @@ h1,h2,h3,h4,.hero-title,.showcase-label,.story .step-txt time{font-family:var(--
 @keyframes hero-fade{from{opacity:0}}
 @keyframes hero-draw{from{transform:scaleX(0)}}
 @keyframes hero-run{from{transform:translateY(-18px)}to{transform:translateY(56px)}}
-@media (max-width:600px){.hero-poles{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:16px}.hero-next{display:none}}
+@media (max-width:600px){.hero-next{display:none}}

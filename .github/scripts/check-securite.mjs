@@ -40,7 +40,9 @@ for (const p of pages) {
     else if (!/ld\+json/.test(attrs) && !allowedInline.has('sha256-' + sha(m[2], 'base64'))) fail(`${p} : script inline inconnu (sha256-${sha(m[2], 'base64')})`);
   }
   if (/smal\.partner@gmail\.com/i.test(html)) fail(`${p} : adresse e-mail en clair dans le HTML`);
-  if (/<iframe\b/i.test(html)) fail(`${p} : iframe inattendue`);
+  // seule iframe admise : le repli reCAPTCHA injecté par Netlify sur la page Contact
+  for (const m of html.matchAll(/<iframe\b[^>]*?src=["']([^"']+)["']/gi))
+    if (!m[1].startsWith('https://www.google.com/recaptcha/')) fail(`${p} : iframe inattendue ${m[1]}`);
 }
 
 // --- 3. Fichiers de code identiques au dépôt (détecte une modification du site déployé)

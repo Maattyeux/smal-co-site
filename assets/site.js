@@ -256,3 +256,52 @@
     form.querySelector('[name=nom]').focus();
   });
 })();
+
+// merci.html : cycliste pixel qui roule sur un sol qui défile et saute les plots (façon jeu de course rétro)
+(function () {
+  var cv = document.getElementById('bikeRunnerCanvas');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d'), S = 4, W = cv.width / S, H = cv.height / S, G = 31; // dessin en basse résolution, agrandi x4
+  var cones = [W + 10, W + 70], jump = -1, last = 0, dist = 0;
+  ctx.setTransform(S, 0, 0, S, 0, 0);
+  function px(x, y, c) { ctx.fillStyle = c; ctx.fillRect(Math.round(x), Math.round(y), 1, 1); }
+  function line(x0, y0, x1, y1, c) { var n = Math.max(Math.abs(x1 - x0), Math.abs(y1 - y0)) || 1; for (var i = 0; i <= n; i++) px(x0 + (x1 - x0) * i / n, y0 + (y1 - y0) * i / n, c); }
+  function wheel(cx, cy, a) {
+    for (var t = 0; t < 6.29; t += .2) px(cx + 4 * Math.cos(t), cy + 4 * Math.sin(t), '#b794ff');
+    line(cx - 3 * Math.cos(a), cy - 3 * Math.sin(a), cx + 3 * Math.cos(a), cy + 3 * Math.sin(a), '#7a3ee0');
+    line(cx + 3 * Math.sin(a), cy - 3 * Math.cos(a), cx - 3 * Math.sin(a), cy + 3 * Math.cos(a), '#7a3ee0');
+  }
+  function leg(hx, hy, bx, by, a, c) {
+    var fx = bx + 2.5 * Math.cos(a), fy = by + 2.5 * Math.sin(a), kx = (hx + fx) / 2 + 3, ky = (hy + fy) / 2 - 1;
+    line(hx, hy, kx, ky, c); line(kx, ky, fx, fy, c);
+  }
+  function frame(t) {
+    var dt = Math.min(t - last, 50) / 1000; last = t; dist += dt * 60; // 60 px logiques/s
+    ctx.clearRect(0, 0, W, H);
+    // sol + cailloux qui défilent
+    line(0, G, W, G, 'rgba(255,255,255,.35)');
+    for (var i = 0; i < 14; i++) px(((i * 37 - dist) % W + W) % W, G + 1 + (i % 2), 'rgba(255,255,255,.25)');
+    // plots oranges ; le cycliste saute quand l'un approche
+    for (i = 0; i < cones.length; i++) {
+      cones[i] -= dt * 60;
+      if (cones[i] < -4) cones[i] = W + 20 + ((dist * 7) % 60);
+      if (jump < 0 && cones[i] > 44 && cones[i] < 50) jump = 0;
+      line(cones[i] - 1, G - 1, cones[i] + 1, G - 1, '#ff7a1a'); line(cones[i], G - 3, cones[i], G - 1, '#ff7a1a');
+    }
+    var y = 0;
+    if (jump >= 0) { jump += dt / .55; y = jump >= 1 ? (jump = -1, 0) : -11 * 4 * jump * (1 - jump); }
+    var a = dist / 4, by = 27 + y;
+    // traînée mauve -> orange derrière le vélo
+    for (i = 0; i < 12; i++) px(19 - i * 1.5, by - 4 + (i % 3), i < 6 ? '#ff7a1a' : '#7a3ee0');
+    leg(31, by - 9, 33, by, a + Math.PI, '#b3541a');
+    wheel(26, by, a); wheel(40, by, a);
+    [[26, by, 33, by], [33, by, 31, by - 7], [31, by - 7, 26, by], [31, by - 7, 39, by - 7], [39, by - 7, 33, by], [39, by - 7, 40, by], [39, by - 7, 41, by - 9]]
+      .forEach(function (l) { line(l[0], l[1], l[2], l[3], '#7a3ee0'); });
+    line(29, by - 8, 32, by - 8, '#fff'); // selle
+    leg(31, by - 9, 33, by, a, '#ff7a1a');
+    line(31, by - 9, 37, by - 14, '#ff7a1a'); line(37, by - 14, 41, by - 9, '#ff7a1a'); // buste, bras
+    ctx.fillStyle = '#fff'; ctx.fillRect(37, by - 18, 3, 3); // tête
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();

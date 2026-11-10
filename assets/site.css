@@ -531,11 +531,8 @@ div.img-fallback{display:grid;place-items:center;width:100%;min-height:120px;bac
 /* Page merci (merci.html, affichée après l'envoi du formulaire de contact) */
 .merci{min-height:100svh;display:grid;place-items:center;text-align:center;padding:clamp(120px,16vw,170px) 0 var(--sec-y-tight);background:radial-gradient(900px 520px at 50% 20%,rgba(122,62,224,.35),transparent 70%),radial-gradient(700px 360px at 50% 110%,rgba(217,178,91,.12),transparent 70%)}
 .merci-in{display:flex;flex-direction:column;align-items:center}
-.merci-check{fill:none;stroke-linecap:round;stroke-linejoin:round;margin-bottom:28px;filter:drop-shadow(0 12px 40px rgba(122,62,224,.6))}
-.merci-check circle{stroke:var(--violet-2);stroke-width:3;stroke-dasharray:227;animation:draw 1s var(--ease) both}
-.merci-check path{stroke:#fff;stroke-width:5;stroke-dasharray:50;animation:draw .6s .8s var(--ease) both}
-@keyframes draw{from{stroke-dashoffset:var(--len,227)}to{stroke-dashoffset:0}}
-.merci-check path{--len:50}
+.trex-bike-stage{width:100%;max-width:600px;margin-bottom:28px}
+.trex-bike-stage canvas{display:block;width:100%;height:auto;image-rendering:pixelated;filter:drop-shadow(0 12px 40px rgba(122,62,224,.5))}
 .merci-eyebrow{animation:fade 1s .9s both}
 .merci-title{animation:fade 1s 1s both}
 .merci-lead{margin:24px auto 0;max-width:52ch;animation:fade 1s 1.15s both}

@@ -18,6 +18,9 @@ Ce dépôt est public : n'y mettez jamais de mot de passe, de clé ni de jeton.
 - **Ne pas modifier** le champ caché `subject` ni le nom du champ `email` sans mettre à jour le filtre Gmail.
 - Conservation annoncée : 3 ans au plus après le dernier échange (page Confidentialité).
 
+## Contrôle automatique hebdomadaire
+Chaque lundi, GitHub Actions lance `.github/scripts/check-securite.mjs` sur le site en ligne (en-têtes, scripts des pages, fichiers de code identiques au dépôt, formulaire, `security.txt`). En cas d'anomalie, GitHub envoie un e-mail au propriétaire du dépôt. Lancement manuel : onglet Actions → « Sécurité hebdomadaire » → Run workflow. Après une modification volontaire de `_headers` ou d'un script inline, mettre à jour les empreintes dans `_headers` ; le contrôle s'y réfère.
+
 ## Revue trimestrielle (janvier, avril, juillet, octobre)
 - [ ] Netlify : membres de l'équipe, applications autorisées et jetons (User settings → Applications), projets inutilisés.
 - [ ] Google (compte du président et boîte de l'association) : Bilan de sécurité, appareils connectés, applications tierces, transferts et filtres Gmail.

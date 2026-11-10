@@ -109,24 +109,32 @@
    <div data-netlify-recaptcha="true"></div>
    <button class="btn" type="submit">Envoyer</button>
   </form>
-  <div class="card success" data-success hidden role="status" aria-live="polite">
+  <div class="success" data-success hidden role="status" aria-live="polite">
    <div class="success-bike-anim" aria-hidden="true">
-    <svg class="success-bike" viewBox="0 0 120 70" width="180" height="105" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-     <defs><linearGradient id="trail-grad" gradientUnits="userSpaceOnUse" x1="-90" x2="18" y1="0" y2="0"><stop offset="0" stop-color="#ff7a1a" stop-opacity="0"/><stop offset=".6" stop-color="#ff7a1a"/><stop offset="1" stop-color="#7a3ee0"/></linearGradient></defs>
-     <path class="success-trail" d="M-90 40H18" stroke="url(#trail-grad)" stroke-width="4"/>
-     <g class="success-wheel"><circle cx="25" cy="52" r="15"/><path d="M25 37v30M10 52h30" stroke-width="1.5"/></g>
-     <g class="success-wheel"><circle cx="92" cy="52" r="15"/><path d="M92 37v30M77 52h30" stroke-width="1.5"/></g>
-     <path d="M25 52h27l-7-26zM45 26l35 3-28 23M80 29l12 23M80 29l3-6h6M40 25h10"/>
-     <path class="success-rider" d="M47 22l25-7M72 15l15 12M47 22l12 15-6 16" stroke="#fff"/>
-     <circle cx="78" cy="9" r="5" fill="#fff" stroke="none"/>
-    </svg>
-    <span class="success-ground"></span>
+    <div class="success-floor"></div>
+    <div class="success-streak"></div>
+    <div class="success-rider-wrap">
+     <div class="success-glow"></div>
+     <span class="success-spark"></span><span class="success-spark"></span><span class="success-spark"></span><span class="success-spark"></span><span class="success-spark"></span>
+     <svg class="success-bike" viewBox="0 0 120 70" width="220" height="128" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <defs><linearGradient id="trail-grad" gradientUnits="userSpaceOnUse" x1="-90" x2="18" y1="0" y2="0"><stop offset="0" stop-color="#ff5e14" stop-opacity="0"/><stop offset=".6" stop-color="#ff5e14"/><stop offset="1" stop-color="#8b24d6"/></linearGradient></defs>
+      <path class="success-trail" d="M-90 40H18" stroke="url(#trail-grad)" stroke-width="4"/>
+      <g class="success-bike-body">
+       <g class="success-wheel"><circle cx="25" cy="52" r="15"/><path d="M25 37v30M10 52h30" stroke-width="1.5"/></g>
+       <g class="success-wheel"><circle cx="92" cy="52" r="15"/><path d="M92 37v30M77 52h30" stroke-width="1.5"/></g>
+       <path d="M25 52h27l-7-26zM45 26l35 3-28 23M80 29l12 23M80 29l3-6h6M40 25h10"/>
+       <path d="M47 22l25-7M72 15l15 12M47 22l12 15-6 16" stroke="#fff"/>
+       <circle cx="78" cy="9" r="5" fill="#fff" stroke="none"/>
+      </g>
+     </svg>
+    </div>
    </div>
    <div class="success-message">
-    <h2 class="h-md success-title" tabindex="-1">MESSAGE ENVOYÉ !</h2>
+    <h2 class="success-title" tabindex="-1">MESSAGE ENVOYÉ&nbsp;!</h2>
     <p class="muted">Merci pour votre confiance. L’équipe SMAL &amp; CO vous recontacte dans les plus brefs délais.</p>
-    <button class="btn btn-ghost btn-small" type="button" data-success-reset>Envoyer un autre message</button>
+    <button class="btn btn-ghost success-reset" type="button" data-success-reset>Envoyer un autre message</button>
    </div>
+  </div>
   </div>
  </div>
 </section>

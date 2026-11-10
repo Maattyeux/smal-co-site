@@ -243,7 +243,7 @@
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
       .then(function (r) {
         if (!r.ok) throw r;
-        form.reset(); form.hidden = true; ok.hidden = false;
+        form.reset(); form.hidden = true; ok.hidden = false; form.parentNode.classList.add('is-sent');
         ok.querySelector('.success-title').focus({ preventScroll: true });
         ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
       })
@@ -252,7 +252,7 @@
   });
   ok.querySelector('[data-success-reset]').addEventListener('click', function () {
     if (window.grecaptcha) try { grecaptcha.reset(); } catch (err) {}
-    ok.hidden = true; form.hidden = false;
+    ok.hidden = true; form.hidden = false; form.parentNode.classList.remove('is-sent');
     form.querySelector('[name=nom]').focus();
   });
 })();

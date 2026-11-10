@@ -887,11 +887,8 @@ body::before{display:none}
 .merci{background:none}
 .merci-steps .k{font-family:var(--mono);font-weight:500;letter-spacing:.14em;color:var(--accent)}
 
-/* ===== Refonte « route bretonne » : titres Barlow Condensed (OFL, auto-hébergée), hero éditorial, chiffres de course,
+/* ===== Refonte « route bretonne » : hero éditorial, chiffres de course,
    pôles en grille asymétrique numérotée, en-têtes photo plein écran, cartes jointes façon tableau de résultats ===== */
-@font-face{font-family:"SMAL Display";src:url(../fonts/barlow-condensed-700.woff2) format("woff2");font-weight:700;font-display:swap}
-@font-face{font-family:"SMAL Display";src:url(../fonts/barlow-condensed-600.woff2) format("woff2");font-weight:600;font-display:swap}
-:root{--impact:"SMAL Display","Arial Narrow",Impact,sans-serif}
 h1,h2,.h-mega,.h-xl,.h-lg,.missions-title,.section-title,.partners-main-title{font-weight:700;letter-spacing:-.005em;line-height:.92}
 .h-xl{font-size:clamp(52px,8.5vw,124px)}
 .h-lg{font-size:clamp(40px,5.4vw,76px)}
@@ -917,16 +914,10 @@ h1,h2,.h-mega,.h-xl,.h-lg,.missions-title,.section-title,.partners-main-title{fo
 .num>span{margin-top:12px;font-size:14px;line-height:1.45;color:var(--muted)}
 
 /* pôles : grille asymétrique (cyclisme en grand), numéro de dossard en coin */
-.showcase-grid{grid-template-columns:1.2fr 1fr 1fr;grid-auto-rows:clamp(240px,22vw,330px);gap:12px;counter-reset:pole}
-.showcase-card{aspect-ratio:auto;counter-increment:pole}
-/* cyclisme et communication (photo portrait) en colonnes hautes, running et événements empilés au centre */
-.showcase-card:nth-child(1){grid-column:1;grid-row:1/3}
-.showcase-card:nth-child(4){grid-column:3;grid-row:1/3}
-.showcase-card:nth-child(1) .showcase-label{font-size:clamp(2.2rem,3.6vw,3.4rem)}
+.showcase-grid{counter-reset:pole}
+.showcase-card{counter-increment:pole}
 .showcase-card::before{content:counter(pole,decimal-leading-zero);position:absolute;top:16px;left:16px;z-index:2;padding:6px 8px;font:500 12px/1 var(--mono);letter-spacing:.14em;color:#fff;background:rgba(8,8,10,.7);border:1px solid var(--line)}
 .showcase-overlay{background:linear-gradient(0deg,rgba(8,8,10,.85) 0%,rgba(8,8,10,0) 45%)}
-@media (max-width:1024px){.showcase-grid{grid-template-columns:1fr 1fr}.showcase-card:nth-child(1),.showcase-card:nth-child(2){grid-column:span 2;grid-row:auto}.showcase-card:nth-child(4){grid-column:auto;grid-row:auto}}
-@media (max-width:600px){.showcase-grid{grid-template-columns:1fr;grid-auto-rows:260px}.showcase-grid .showcase-card{grid-column:auto;grid-row:auto}}
 
 /* en-têtes des pôles : la photo passe en plein écran, titre posé sur la partie sombre */
 .phead-photo{position:relative;min-height:min(92svh,880px);display:flex;align-items:flex-end;padding:140px 0 clamp(48px,7vw,88px);overflow:hidden;isolation:isolate;border-bottom:0}
@@ -968,3 +959,6 @@ div.img-fallback{background:var(--raised)}
 .offer-badge-gold,.offer-pill{font:500 11px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;background:transparent;border:1px solid var(--line);color:var(--muted)}
 .offer-features li::before,.card-featured .offer-features li::before{color:var(--accent)}
 @media (max-width:600px){.hero-meta{font-size:11px;letter-spacing:.1em}}
+/* tous les titres en Impact, capitales (demande explicite) */
+h1,h2,h3,h4,.hero-title,.showcase-label,.story .step-txt time{font-family:var(--impact)!important;font-weight:400;letter-spacing:.03em;text-transform:uppercase}
+.showcase-label{font-size:clamp(1.3rem,1.8vw,1.8rem)} /* Impact est plus large : « Communication » garde de l’air avant la flèche */

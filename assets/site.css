@@ -835,3 +835,54 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .story .step-logo img,.story .step-logo img:only-child{width:auto;height:auto;max-width:72%;max-height:72%;aspect-ratio:1;object-fit:contain;padding:5%;margin:0 auto;border-radius:12px}
 /* cartes de la frise visibles d'emblée : le fondu à l'arrivée de chaque carte donnait une impression de latence aux flèches */
 .js .story .rv{opacity:1;transform:none;transition:none}
+
+/* ===== DA course (passe unslop) : noirs profonds, accent au compte-gouttes, labels techniques en chasse fixe, chiffres XXL nets.
+   Bloc final : il ne fait que resserrer le système visuel ci-dessus, sans toucher au balisage. ===== */
+:root{--bg:#08080a;--bg-2:#0f0f13;--panel:#0f0f13;--raised:#16161b;--line:rgba(255,255,255,.1);--muted:#a1a1aa;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Consolas,monospace;--ease:cubic-bezier(.22,1,.36,1)}
+/* surfaces : deux niveaux de noir + liseré, plus de voiles colorés ni de gris bleutés */
+body::before{display:none}
+.vision-objectifs,.missions-section{background:var(--bg)}
+.showcase-card,.bureau-card,.media-duo-card,.story>.step,.list-cards li,.facts>div{background:var(--panel)}
+.story .step-card,.story .step-logo{background:var(--raised)}
+.cobrand{background:var(--raised)}
+.num strong,.step-stat strong{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#fff;font-variant-numeric:tabular-nums}
+/* labels techniques : chasse fixe, capitales, approche large */
+.eyebrow,.list-cards time,.facts dt,.dropdown-item-badge,.bureau-role,.step-card span,.cobrand span,.foot-h,.duo-tag{font-family:var(--mono);font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.facts dt,.list-cards time{color:var(--accent)}
+/* frise : la date devient le chiffre fort de la carte, liseré d'accent au survol */
+.story .step-txt time{font:400 clamp(26px,2.4vw,32px)/1 var(--impact);letter-spacing:.02em;text-transform:uppercase;color:#fff;margin-bottom:12px}
+.story .step.is-goal time{color:var(--gold)}
+.story>.step{border-top:2px solid var(--line);transition:border-color .18s var(--ease)}
+.story>.step:hover{border-color:rgba(255,255,255,.2);border-top-color:var(--accent)}
+.story .step-txt p{color:var(--muted)}
+/* pôles (accueil) : barre à la couleur du pôle qui se trace au survol, plus de zoom ni de soulèvement */
+.showcase-card::after{content:"";position:absolute;left:0;right:0;bottom:0;z-index:3;height:3px;background:var(--pc,var(--accent));transform:scaleX(0);transform-origin:0 50%;transition:transform .25s var(--ease)}
+.showcase-card:hover::after,.showcase-card:focus-visible::after{transform:scaleX(1)}
+/* survols feutrés partout : couleur et liseré, jamais d'échelle ni de décalage de carte */
+.showcase-card:hover,.showcase-card:focus-visible,.bureau-card:hover,.media-duo-card:hover{transform:none}
+.showcase-card:hover .showcase-img,.bureau-card:hover .bureau-img,.media-duo-card:hover .duo-img,.story .step:hover .step-pics img,.step-pics img:hover,.bottom-gallery-img:hover{transform:none}
+.bureau-card:hover{border-color:var(--accent)}
+/* flèches de galerie : carrés nets, sans rebond en boucle */
+.scroll-indicator{animation:none;background:var(--bg);border-color:var(--line);-webkit-backdrop-filter:none;backdrop-filter:none;transition:background .15s var(--ease),color .15s var(--ease),opacity .3s}
+.scroll-indicator:hover{background:#fff;border-color:#fff;color:var(--bg)}
+/* en-têtes de pages : titre XXL, filet d'accent, entrée unique et courte */
+.phead{border-bottom:1px solid var(--line)}
+.phead .h-xl{font-size:clamp(64px,11vw,160px);line-height:.9;animation:fade .5s var(--ease) both}
+.phead .lead{color:var(--muted);animation:fade .5s .08s var(--ease) both}
+.phead>.wrap::after{content:"";display:block;width:64px;height:3px;margin-top:32px;background:var(--accent)}
+/* projets futurs : liste numérotée façon dossards */
+.goals{counter-reset:goal}
+.goals li,.sport .goals li{counter-increment:goal;padding-left:80px}
+.goals li::before,.sport .goals li::before{content:counter(goal,decimal-leading-zero);left:0;top:50%;transform:translateY(-50%);font:400 clamp(28px,3vw,40px)/1 var(--impact);color:var(--accent);font-variant-numeric:tabular-nums}
+/* formulaire de contact : champs sur le noir profond, liseré d'accent en tête, focus net */
+.form.card{background:var(--panel);border-top:2px solid var(--accent)}
+.form label{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.form .check{font:400 14px/1.5 var(--sans);letter-spacing:0;text-transform:none}
+.form input:not([type=checkbox]),.form select,.form textarea{background:var(--bg);border-color:var(--line);color:var(--text);text-transform:none;letter-spacing:0;transition:border-color .15s var(--ease)}
+.form input:not([type=checkbox]):hover,.form select:hover,.form textarea:hover{border-color:rgba(255,255,255,.25)}
+.form input:not([type=checkbox]):focus,.form select:focus,.form textarea:focus{outline:1px solid var(--accent);outline-offset:-1px;border-color:var(--accent)}
+.form .btn{width:100%}
+/* merci : étapes numérotées dans le même registre */
+.merci{background:none}
+.merci-steps .k{font-family:var(--mono);font-weight:500;letter-spacing:.14em;color:var(--accent)}

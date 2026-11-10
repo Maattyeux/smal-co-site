@@ -1,0 +1,26 @@
+# Contrôle de sécurité du site chaque lundi à 7 h (heure de Paris en hiver).
+# En cas d'anomalie, le contrôle échoue et GitHub envoie un e-mail au propriétaire du dépôt.
+# Lancement manuel : onglet Actions du dépôt → « Sécurité hebdomadaire » → Run workflow.
+name: Sécurité hebdomadaire
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  controle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Contrôle du site en ligne
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: node .github/scripts/check-securite.mjs

@@ -978,3 +978,19 @@ h1,h2,h3,h4,.hero-title,.showcase-label,.story .step-txt time{font-family:var(--
 @keyframes hero-draw{from{transform:scaleX(0)}}
 @keyframes hero-run{from{transform:translateY(-18px)}to{transform:translateY(56px)}}
 @media (max-width:600px){.hero-next{display:none}}
+
+/* ===== Transitions continues entre sections : plus aucun filet ni changement brusque de fond =====
+   Accueil : la photo du hero reste fixe derrière les sections suivantes. Voir le voile continu ci-dessous. */
+/* un seul voile continu qui déborde de 50vh sous le hero (pas de raccord entre deux dégradés, donc pas de trait au demi-pixel) ;
+   le hero fait 100svh = 2/3 de la hauteur du voile : le noir culmine (.9) pile sur son bord bas puis s'efface dans la section suivante */
+.hero-logo{overflow:visible}
+.hero-logo .hero-shade{bottom:-50vh;background:linear-gradient(180deg,rgba(8,8,10,.5) 0%,rgba(8,8,10,0) 14.7%,rgba(8,8,10,0) 28%,rgba(8,8,10,.4) 45.3%,rgba(8,8,10,.9) 66.7%,rgba(8,8,10,.55) 80%,rgba(8,8,10,0) 100%);pointer-events:none}
+/* en-têtes photo des pôles : fondu jusqu'au noir exact de la page */
+.phead-photo::before{background:linear-gradient(0deg,var(--bg) 0%,var(--bg) 5%,rgba(8,8,10,.6) 40%,rgba(8,8,10,.1) 72%),linear-gradient(180deg,rgba(8,8,10,.6),transparent 28%)}
+/* filets de séparation entre sections retirés (le rythme vient de l'espace et des titres) */
+.phead,.numbers,.sec-alt,.vision-objectifs,.band,.sport,.cta-final{border-top:0;border-bottom:0}
+.cta-final::before{display:none}
+/* pied de page : il émerge du fond au lieu d'être posé sous un trait */
+.foot{border-top:0;background:linear-gradient(180deg,var(--bg) 0,var(--bg-2) 160px)}
+.copyright-services-section{border-top:0}
+.phead-photo{background:var(--bg)}.phead-bg{height:calc(100% - 4px)} /* la photo s’arrête 4px avant le bord : aucun pixel clair ne filtre sous le fondu au demi-pixel */

@@ -1010,6 +1010,9 @@ h1,h2,h3,h4,.hero-title,.showcase-label,.story .step-txt time{font-family:var(--
 .runner dt{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
 .runner dd{margin:0;font-size:16px;line-height:1.45}
 .runner dd li+li{margin-top:4px}
+.runner-open{border:1px dashed var(--accent)}
+.runner-open-mark{aspect-ratio:4/5;display:grid;place-items:center;font:400 clamp(72px,9vw,128px)/1 var(--impact);color:var(--accent);background:var(--bg)}
+.runner-open p{color:var(--muted);font-size:16px;margin-bottom:16px}
 .mosaic-6{grid-template-columns:repeat(3,1fr)}
 .run-notice{display:inline-block;margin-bottom:clamp(28px,4vw,48px);padding:12px 18px;border:1px solid var(--accent);border-left-width:4px;font-weight:600;color:var(--head)}
 .run-shoes{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;position:sticky;top:96px}

@@ -1,0 +1,7 @@
+# Mises à jour hebdomadaires des actions GitHub (pas de package.json : pas de section npm)
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

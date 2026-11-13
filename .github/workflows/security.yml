@@ -1,0 +1,75 @@
+# Contrôles de sécurité du dépôt et du site en production.
+# - à chaque push et pull request vers main, et chaque lundi : secrets (gitleaks), npm audit, en-têtes de prod
+# - chaque lundi et en lancement manuel seulement : scan OWASP ZAP baseline du site en ligne
+# Les actions sont figées par SHA de commit (tag indiqué en commentaire) ; Dependabot les met à jour.
+name: Sécurité CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PROD_URL: https://smal-co-web.netlify.app
+
+jobs:
+  gitleaks:
+    name: Secrets (gitleaks)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # tout l'historique, pas seulement le dernier commit
+      - uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  npm-audit:
+    name: Dépendances (npm audit)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: npm audit (si package.json)
+        run: |
+          if [ ! -f package.json ]; then echo "Pas de package.json : contrôle ignoré."; exit 0; fi
+          npm audit --audit-level=high
+
+  headers-prod:
+    name: En-têtes de sécurité en production
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Vérifier les en-têtes sur ${{ env.PROD_URL }}
+        run: |
+          headers=$(curl -sSI --retry 3 --retry-delay 10 "$PROD_URL/")
+          echo "$headers"
+          missing=0
+          for h in strict-transport-security x-content-type-options x-frame-options referrer-policy permissions-policy; do
+            echo "$headers" | grep -qi "^$h:" || { echo "::error::En-tête manquant : $h"; missing=1; }
+          done
+          # CSP bloquante ou en mode Report-Only : l'une des deux doit être présente
+          echo "$headers" | grep -qiE '^content-security-policy(-report-only)?:' || { echo "::error::En-tête manquant : content-security-policy"; missing=1; }
+          echo "$headers" | grep -qi '^x-frame-options: *deny' || { echo "::error::X-Frame-Options n'est pas DENY"; missing=1; }
+          echo "$headers" | grep -qi '^referrer-policy: *strict-origin-when-cross-origin' || { echo "::error::Referrer-Policy inattendue"; missing=1; }
+          exit $missing
+
+  zap-baseline:
+    name: Scan OWASP ZAP (baseline)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: zaproxy/action-baseline@de8ad967d3548d44ef623df22cf95c3b0baf8b25 # v0.15.0
+        with:
+          target: ${{ env.PROD_URL }}
+          allow_issue_writing: false # pas de création d'issue : rapport en artefact du run
+          fail_action: false

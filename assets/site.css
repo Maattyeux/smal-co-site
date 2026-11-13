@@ -571,7 +571,7 @@ h1,h2,.h-mega,.h-xl,.h-lg,.section-title,.hero-slogan{font-family:var(--impact);
 .offer-features li::before{content:"✔";position:absolute;left:0;color:#a855f7;font-size:.85rem}
 .card-featured .offer-features li::before{color:#c084fc}
 /* bouton calé en bas de carte, à hauteur égale entre les 3 offres */
-.offer-btn{display:block;margin-top:auto;text-align:center;padding:.9rem 1.2rem;border-radius:12px;font:600 .95rem/1.2 var(--sans);text-decoration:none;transition:all .25s ease}
+.offer-btn{display:block;margin-top:auto;text-align:center;padding:.9rem 1.2rem;border-radius:12px;font:600 .95rem/1.2 var(--sans);text-decoration:none;transition:background-color .25s ease,color .25s ease,border-color .25s ease,box-shadow .25s ease,transform .25s ease}
 .btn-cycling,.btn-running{background:rgba(168,85,247,.15);color:#fff;border:1px solid rgba(168,85,247,.4)}
 .btn-cycling:hover,.btn-running:hover{background:#a855f7;color:#fff;box-shadow:0 8px 20px rgba(168,85,247,.4)}
 .btn-gold{background:#a855f7;color:#fff;box-shadow:0 6px 18px rgba(168,85,247,.4)}
@@ -1021,3 +1021,15 @@ h1,h2,h3,h4,.hero-title,.showcase-label,.story .step-txt time{font-family:var(--
 .run-links{margin-top:20px;color:var(--muted)}
 @media (max-width:980px){.runner,.list-cards-4>li{flex-basis:calc((100% - 20px)/2)}}
 @media (max-width:560px){.runner,.run-stack>li{flex-basis:100%}.mosaic-6{grid-template-columns:repeat(2,1fr)}}
+
+/* Badge sécurité (pied de page) : état en direct du contrôle quotidien (GitHub Actions) */
+.sec-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid color-mix(in srgb,var(--c-media) 45%,transparent);border-radius:999px;color:var(--head);font-size:13px;text-decoration:none;transition:border-color .25s ease,background-color .25s ease}
+.sec-badge svg{color:var(--c-media);flex:none}
+.sec-badge-live{height:20px;width:auto;display:block}
+.sec-badge:hover,.sec-badge:focus-visible{border-color:var(--c-media);background:color-mix(in srgb,var(--c-media) 10%,transparent)}
+
+/* Transition douce entre les pages (navigateurs compatibles ; ignorée ailleurs, coupée si mouvement réduit) */
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.28s;animation-timing-function:ease}
+}

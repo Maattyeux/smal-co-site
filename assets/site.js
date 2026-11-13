@@ -26,7 +26,9 @@
     var max = document.documentElement.scrollHeight - window.innerHeight;
     header.style.setProperty('--sp', max > 0 ? Math.min(1, window.scrollY / max).toFixed(4) : 0);
   }
-  if (header) { onScroll(); window.addEventListener('scroll', onScroll, { passive: true }); }
+  // une mise à jour par image affichée (requestAnimationFrame) : défilement fluide, sans à-coups
+  var ticking = false;
+  if (header) { onScroll(); window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; onScroll(); }); } }, { passive: true }); }
 
   if (header && burger && menu) {
     burger.addEventListener('click', function () {
@@ -180,10 +182,11 @@
   });
 })();
 
-// image en erreur : remplacée par un bloc monogramme (logos exclus, leur alt suffit)
+// image en erreur : remplacée par un bloc monogramme (logos exclus, leur alt suffit ; badge sécurité retiré)
 (function () {
   function swap(img) {
     if (!img.parentNode || /logos\//.test(img.getAttribute('src') || '')) return;
+    if (img.classList.contains('sec-badge-live')) { img.remove(); return; } // badge GitHub indisponible : on le retire simplement
     var d = document.createElement('div'), w = img.getAttribute('width'), h = img.getAttribute('height');
     d.className = (img.className + ' img-fallback').trim();
     d.textContent = 'SMAL & CO';

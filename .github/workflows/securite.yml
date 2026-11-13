@@ -1,11 +1,12 @@
-# Contrôle de sécurité du site chaque lundi à 7 h (heure de Paris en hiver).
+# Contrôle de sécurité du site chaque jour à 7 h (heure de Paris en hiver).
+# Son état (réussi / en échec) est affiché en direct par le badge du pied de page du site.
 # En cas d'anomalie, le contrôle échoue et GitHub envoie un e-mail au propriétaire du dépôt.
-# Lancement manuel : onglet Actions du dépôt → « Sécurité hebdomadaire » → Run workflow.
-name: Sécurité hebdomadaire
+# Lancement manuel : onglet Actions du dépôt → « Sécurité quotidienne » → Run workflow.
+name: Sécurité quotidienne
 
 on:
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 permissions:

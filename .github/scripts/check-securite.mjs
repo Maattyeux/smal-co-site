@@ -1,4 +1,4 @@
-// Contrôle de sécurité hebdomadaire du site en ligne (lancé par .github/workflows/securite-hebdo.yml).
+// Contrôle de sécurité quotidien du site en ligne (lancé par .github/workflows/securite.yml).
 // Compare le site servi par Netlify au dépôt : en-têtes, scripts présents dans les pages, fichiers de code,
 // formulaire de contact. Toute anomalie fait échouer le contrôle, et GitHub envoie alors un e-mail.
 // Usage local : node .github/scripts/check-securite.mjs   (SITE=https://... pour viser une autre adresse)
@@ -11,7 +11,7 @@ const problems = [], notes = [];
 const fail = (m) => problems.push(m);
 
 async function get(path) {
-  const r = await fetch(SITE + path, { redirect: 'follow', headers: { 'user-agent': 'smal-securite-hebdo' } });
+  const r = await fetch(SITE + path, { redirect: 'follow', headers: { 'user-agent': 'smal-securite' } });
   return { status: r.status, headers: r.headers, buf: Buffer.from(await r.arrayBuffer()) };
 }
 
@@ -87,6 +87,14 @@ if (process.env.NETLIFY_AUTH_TOKEN) {
   if (!c) fail('Netlify : formulaire « contact » non détecté');
   else notes.push(`Messages reçus au total : ${c.submission_count}`);
 } else notes.push('Contrôle Netlify ignoré (secret NETLIFY_AUTH_TOKEN non défini)');
+
+// --- 7. Note Mozilla Observatory : doit rester A+ (injoignable = simple note, pour éviter les fausses alertes)
+try {
+  const obs = await fetch('https://observatory-api.mdn.mozilla.net/api/v2/scan?host=' + new URL(SITE).host, { method: 'POST' }).then((r) => r.json());
+  if (obs.error || !obs.grade) notes.push(`Mozilla Observatory : pas de note (${obs.error || 'réponse vide'})`);
+  else if (obs.grade !== 'A+') fail(`Mozilla Observatory : note ${obs.grade} (attendu A+), détails : ${obs.details_url}`);
+  else notes.push(`Mozilla Observatory : ${obs.grade} (${obs.score}, ${obs.tests_passed}/${obs.tests_quantity} tests réussis)`);
+} catch (e) { notes.push('Mozilla Observatory injoignable : ' + e.message); }
 
 console.log(`Site contrôlé : ${SITE}`);
 notes.forEach((n) => console.log('ℹ ' + n));

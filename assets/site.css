@@ -1015,25 +1015,9 @@ h1,h2,h3,h4,.hero-title,.showcase-label,.story .step-txt time{font-family:var(--
 .runner-open p{color:var(--muted);font-size:16px;margin-bottom:16px}
 .mosaic-6{grid-template-columns:repeat(3,1fr)}
 .run-notice{display:inline-block;margin-bottom:clamp(28px,4vw,48px);padding:12px 18px;border:1px solid var(--accent);border-left-width:4px;font-weight:600;color:var(--head)}
-.run-shoes{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;position:sticky;top:96px}
-.facts-2{grid-template-columns:1fr 1fr;margin:28px 0 40px}
-.facts-2 dd{font-size:18px}
 .run-offer-h{margin-bottom:16px}
 .values-1{grid-template-columns:1fr;border-radius:18px}
 .run-frame{margin-top:24px;color:var(--muted)}
 .run-links{margin-top:20px;color:var(--muted)}
 @media (max-width:980px){.runner,.list-cards-4>li{flex-basis:calc((100% - 20px)/2)}}
-@media (max-width:860px){.run-shoes{position:static;aspect-ratio:16/10}}
-@media (max-width:560px){.runner,.run-stack>li{flex-basis:100%}.mosaic-6{grid-template-columns:repeat(2,1fr)}.facts-2{grid-template-columns:1fr}}
-/* RDV-RUN-AVENTURE:START */
-.mirror{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:clamp(32px,5vw,56px)}
-.mirror li{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
-.mirror li>div{background:var(--panel);padding:24px}
-.mirror li>div+div{border-left:2px solid var(--accent)}
-.mirror .k{display:block;font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.mirror li>div+div .k{color:var(--accent)}
-.mirror h3{font:700 20px/1.2 var(--display);color:var(--head);margin-bottom:6px}
-.mirror p{color:var(--muted);font-size:16px}
-.mirror-src{margin-top:16px;font-size:14px;color:var(--muted)}
-@media (max-width:640px){.mirror li{grid-template-columns:1fr}.mirror li>div+div{border-left:0;border-top:2px solid var(--accent)}}
-/* RDV-RUN-AVENTURE:END */
+@media (max-width:560px){.runner,.run-stack>li{flex-basis:100%}.mosaic-6{grid-template-columns:repeat(2,1fr)}}

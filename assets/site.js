@@ -4,9 +4,13 @@
   if (cn && (cn.saveData || /2g$/.test(cn.effectiveType || ''))) document.body.classList.add('low-bandwidth');
   // Découpe le manifeste en mots pour l'effet de révélation (le site de référence le fait au build)
   document.querySelectorAll('[data-words]').forEach(function (p) {
-    p.innerHTML = p.textContent.trim().split(/\s+/).map(function (w, i) {
-      return '<span class="w" style="--i:' + i + '">' + w + '</span> ';
-    }).join('');
+    var words = p.textContent.trim().split(/\s+/);
+    p.textContent = '';
+    words.forEach(function (w, i) { // DOM plutôt qu'innerHTML : aucun texte interprété comme du HTML
+      var s = document.createElement('span');
+      s.className = 'w'; s.style.setProperty('--i', i); s.textContent = w;
+      p.append(s, ' ');
+    });
   });
   // Page unique : refermer le menu mobile après un clic sur un lien
   var menu = document.getElementById('menu'), burger = document.querySelector('[data-burger]');

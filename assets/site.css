@@ -1022,14 +1022,77 @@ h1,h2,h3,h4,.hero-title,.showcase-label,.story .step-txt time{font-family:var(--
 @media (max-width:980px){.runner,.list-cards-4>li{flex-basis:calc((100% - 20px)/2)}}
 @media (max-width:560px){.runner,.run-stack>li{flex-basis:100%}.mosaic-6{grid-template-columns:repeat(2,1fr)}}
 
-/* Badge sécurité (pied de page) : état en direct du contrôle quotidien (GitHub Actions) */
-.sec-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid color-mix(in srgb,var(--c-media) 45%,transparent);border-radius:999px;color:var(--head);font-size:13px;text-decoration:none;transition:border-color .25s ease,background-color .25s ease}
-.sec-badge svg{color:var(--c-media);flex:none}
-.sec-badge-live{height:20px;width:auto;display:block}
-.sec-badge:hover,.sec-badge:focus-visible{border-color:var(--c-media);background:color-mix(in srgb,var(--c-media) 10%,transparent)}
+/* Vignette sécurité « Liquid Glass » (pied de page) : lit /security-status.json, écrit par le contrôle quotidien */
+.sec-glass{position:relative;display:inline-flex}
+.sec-chip{--rx:0deg;--ry:0deg;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:6px 14px 6px 8px;border-radius:14px;font:inherit;font-size:13px;color:var(--head);cursor:pointer;
+  background:rgba(14,16,22,.54) linear-gradient(145deg,rgba(255,255,255,.11) 0%,rgba(255,255,255,.025) 48%,rgba(0,0,0,.22) 100%);-webkit-backdrop-filter:blur(24px) saturate(185%);backdrop-filter:blur(24px) saturate(185%);border:1px solid rgba(255,255,255,.2);
+  box-shadow:inset 0 1px 1.5px 0 rgba(255,255,255,.32),inset 0 -1px 1px 0 rgba(0,0,0,.5),0 22px 44px -12px rgba(0,0,0,.8),0 22px 44px -18px rgba(16,185,129,.25);
+  transform:perspective(600px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .35s var(--ease,ease),border-color .3s,box-shadow .3s}
+.sec-chip.is-tilting{transition:transform .08s linear,border-color .3s,box-shadow .3s}
+.sec-chip:hover,.sec-chip:focus-visible,.sec-chip[aria-expanded="true"]{border-color:rgba(16,185,129,.5)}
+.sec-chip::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.16) 50%,transparent 65%);transform:translateX(-120%)}
+.sec-shield{width:28px;height:30px;flex:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6)) drop-shadow(0 0 6px rgba(16,185,129,.35))}
+.sec-chip-txt{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;text-align:left}
+.sec-chip-txt small{font:500 10px/1.2 var(--mono,monospace);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.sec-dot{width:8px;height:8px;border-radius:50%;flex:none;background:#10b981;box-shadow:0 0 0 0 rgba(16,185,129,.6)}
+.sec-glass[data-state="warn"] .sec-dot{background:#f59e0b;box-shadow:none}
+.sec-panel{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);z-index:50;width:min(340px,calc(100vw - 32px));padding:18px;border-radius:18px;color:var(--text);font-size:14px;text-align:left;
+  background:rgba(18,18,22,.78);-webkit-backdrop-filter:blur(18px) saturate(180%);backdrop-filter:blur(18px) saturate(180%);border:1px solid rgba(255,255,255,.14);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 24px 60px -12px rgba(0,0,0,.8)}
+.sec-panel[hidden]{display:none}
+.sec-panel-h{margin:0 0 4px;font-weight:700;color:var(--head)}
+.sec-panel-date{margin:0 0 14px;color:var(--muted);font-size:13px}
+.sec-panel-list{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
+.sec-panel-list li{display:flex;gap:8px;align-items:flex-start;line-height:1.35}
+.sec-panel-list li::before{content:"";flex:none;width:14px;height:14px;margin-top:2px;border-radius:50%;background:#10b981 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/10px no-repeat}
+.sec-panel a{color:#34d399;font-size:13px}
+@media (max-width:560px){.sec-panel{position:fixed;left:16px;right:16px;bottom:16px;width:auto;transform:none}}
+@media (prefers-reduced-motion:no-preference){
+  .sec-chip::after{animation:sec-shimmer 7s ease-in-out infinite}
+  .sec-glass:not([data-state="warn"]) .sec-dot{animation:sec-pulse 2.4s ease-out infinite}
+}
+.low-bandwidth .sec-chip::after,.low-bandwidth .sec-dot{animation:none}
+@keyframes sec-shimmer{0%,80%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@keyframes sec-pulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.55)}70%,100%{box-shadow:0 0 0 7px rgba(16,185,129,0)}}
 
 /* Transition douce entre les pages (navigateurs compatibles ; ignorée ailleurs, coupée si mouvement réduit) */
 @media (prefers-reduced-motion:no-preference){
   @view-transition{navigation:auto}
   ::view-transition-old(root),::view-transition-new(root){animation-duration:.28s;animation-timing-function:ease}
 }
+
+/* ===== Dark Liquid Glass : vignettes de données et d'information (dernier calque, prioritaire) =====
+   Une seule définition, appliquée à .liquid-glass-card et aux composants existants. Les cartes photo
+   (bento, pôles, bureau, duo média) ne sont volontairement pas concernées. Angles droits : règle globale du site. */
+.liquid-glass-card,.facts,.story>.step,.list-cards>li,.card,.event,.offer-card,.partners>li,.num{
+  background-color:rgba(14,16,22,.54);
+  background-image:linear-gradient(145deg,rgba(255,255,255,.11) 0%,rgba(255,255,255,.025) 48%,rgba(0,0,0,.22) 100%);
+  -webkit-backdrop-filter:blur(24px) saturate(185%);backdrop-filter:blur(24px) saturate(185%);
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:inset 0 1px 1.5px 0 rgba(255,255,255,.32),inset 0 -1px 1px 0 rgba(0,0,0,.5),0 22px 44px -12px rgba(0,0,0,.8);
+  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.liquid-glass-card:hover,.facts:hover,.story>.step:hover,.list-cards>li:hover,.card:hover,.event:hover,.offer-card:hover,.partners>li:hover,.num:hover{
+  border-color:rgba(255,255,255,.3);
+  box-shadow:inset 0 1px 1.5px 0 rgba(255,255,255,.4),inset 0 -1px 1px 0 rgba(0,0,0,.5),0 26px 52px -12px rgba(0,0,0,.85)}
+/* accents conservés : filet de couleur en haut des étapes de la frise, des chiffres clés et de l'offre vedette */
+.story>.step,.story>.step:hover{border-top:2px solid var(--line)}
+.story>.step:hover{border-top-color:var(--accent)}
+.num,.num:hover,.card-featured,.card-featured:hover{border-top:2px solid var(--accent)}
+.num{padding:24px}
+/* chiffres sur une ligne (« +100 ») : taille plafonnée par la largeur de la carte, identique pour toutes */
+.num{container-type:inline-size}
+.num strong{white-space:nowrap;font-size:min(clamp(64px,8vw,124px),44cqi)}
+@media (max-width:640px){.num{padding:20px 16px}}
+/* blocs empilés (Valeurs / Fondateurs…, Instagram / Formats / Audience) : compartiments transparents, séparateurs fins */
+.facts{gap:0}
+.facts>div{background:transparent}
+.facts>div+div{border-top:1px solid rgba(255,255,255,.09)}
+/* grilles de cartes jointes → cartes de verre séparées */
+.list-cards{gap:16px;background:none;border:0}
+.list-cards>li{flex:1 1 calc((100% - 32px)/3)}
+.list-cards>li:hover{background-color:rgba(14,16,22,.54)}
+@media (max-width:640px){.list-cards>li{flex-basis:100%}}
+/* sous-blocs internes : verre léger */
+.story .step-card,.story .step-logo,.event dl>div{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
+.event dl>div{padding:12px 14px}
+@media (prefers-reduced-motion:reduce){.liquid-glass-card,.facts,.story>.step,.list-cards>li,.card,.event,.offer-card,.partners>li,.num{transition:none}}

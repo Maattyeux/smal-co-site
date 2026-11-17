@@ -182,11 +182,10 @@
   });
 })();
 
-// image en erreur : remplacée par un bloc monogramme (logos exclus, leur alt suffit ; badge sécurité retiré)
+// image en erreur : remplacée par un bloc monogramme (logos exclus, leur alt suffit)
 (function () {
   function swap(img) {
     if (!img.parentNode || /logos\//.test(img.getAttribute('src') || '')) return;
-    if (img.classList.contains('sec-badge-live')) { img.remove(); return; } // badge GitHub indisponible : on le retire simplement
     var d = document.createElement('div'), w = img.getAttribute('width'), h = img.getAttribute('height');
     d.className = (img.className + ' img-fallback').trim();
     d.textContent = 'SMAL & CO';
@@ -307,4 +306,45 @@
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+})();
+
+// Vignette sécurité du pied de page : lit /security-status.json (écrit par le contrôle quotidien GitHub Actions)
+(function () {
+  var box = document.querySelector('[data-sec]');
+  if (!box) return;
+  var chip = box.querySelector('.sec-chip'), panel = box.querySelector('.sec-panel');
+  function q(s) { return box.querySelector(s); }
+  function warn(label, title, date) {
+    box.setAttribute('data-state', 'warn');
+    q('[data-sec-label]').textContent = label; q('[data-sec-title]').textContent = title; q('[data-sec-date]').textContent = date;
+  }
+  fetch('/security-status.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : Promise.reject(); }).then(function (d) {
+    var list = q('[data-sec-list]');
+    (d.shields || []).forEach(function (t) { var li = document.createElement('li'); li.textContent = t; list.appendChild(li); });
+    var t = d.lastCheck && new Date(d.lastCheck);
+    if (d.status !== 'verified' || !t || isNaN(t)) return warn('Site protégé', 'Protections actives', 'Premier audit automatique à venir.');
+    var when = t.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) + ' à ' + t.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    // contrôle quotidien : plus de 48 h sans audit réussi = on l'affiche honnêtement
+    if (Date.now() - t > 48 * 36e5) return warn('Audit en retard', 'Protections actives', 'Dernier audit réussi le ' + when + '.');
+    q('[data-sec-label]').textContent = 'Site protégé · vérifié';
+    q('[data-sec-date]').textContent = 'Dernier audit automatique le ' + when + (d.headersGrade ? ' · en-têtes ' + d.headersGrade : '') + '.';
+  }).catch(function () { warn('Site protégé', 'Protections actives', 'État du dernier audit indisponible.'); });
+
+  function toggle(open) {
+    panel.hidden = !open; chip.setAttribute('aria-expanded', open);
+  }
+  chip.addEventListener('click', function () { toggle(panel.hidden); });
+  document.addEventListener('click', function (e) { if (!panel.hidden && !box.contains(e.target)) toggle(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { toggle(false); chip.focus(); } });
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || document.body.classList.contains('low-bandwidth') || !matchMedia('(hover: hover)').matches) return;
+  chip.addEventListener('pointermove', function (e) {
+    var r = chip.getBoundingClientRect();
+    chip.classList.add('is-tilting');
+    chip.style.setProperty('--rx', ((.5 - (e.clientY - r.top) / r.height) * 14).toFixed(2) + 'deg');
+    chip.style.setProperty('--ry', (((e.clientX - r.left) / r.width - .5) * 10).toFixed(2) + 'deg');
+  });
+  chip.addEventListener('pointerleave', function () {
+    chip.classList.remove('is-tilting'); chip.style.removeProperty('--rx'); chip.style.removeProperty('--ry');
+  });
 })();

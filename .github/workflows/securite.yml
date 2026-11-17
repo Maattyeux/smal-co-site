@@ -1,6 +1,10 @@
-# Contrôle de sécurité du site chaque jour à 7 h (heure de Paris en hiver).
-# Son état (réussi / en échec) est affiché en direct par le badge du pied de page du site.
-# En cas d'anomalie, le contrôle échoue et GitHub envoie un e-mail au propriétaire du dépôt.
+# Audit de sécurité complet chaque jour à 7 h (heure de Paris en hiver).
+# 1. secrets : aucune clé ni mot de passe dans le code ni dans l'historique (gitleaks)
+# 2. analyse : analyse statique du code JavaScript / HTML (Semgrep)
+# 3. controle : site en ligne (en-têtes, CSP, scripts, fichiers, formulaire, note Mozilla Observatory)
+# Si les trois réussissent, security-status.json est mis à jour et commité sur main : Netlify le publie
+# et la vignette du pied de page affiche la date de ce dernier audit. En cas d'échec, rien n'est publié
+# (la vignette signale un audit en retard après 48 h) et GitHub envoie un e-mail au propriétaire du dépôt.
 # Lancement manuel : onglet Actions du dépôt → « Sécurité quotidienne » → Run workflow.
 name: Sécurité quotidienne
 
@@ -13,11 +17,36 @@ permissions:
   contents: read
 
 jobs:
-  controle:
+  secrets:
+    name: Secrets (gitleaks)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # tout l'historique
+      - uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  analyse:
+    name: Analyse statique (Semgrep)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    container: semgrep/semgrep
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: semgrep scan --config p/javascript --config p/html --config p/secrets --metrics=off --error
+
+  controle:
+    name: Contrôle du site en ligne
+    needs: [secrets, analyse]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write # pour commiter security-status.json
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -25,3 +54,11 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         run: node .github/scripts/check-securite.mjs
+      - name: Publier security-status.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add security-status.json
+          git commit -m "chore(sécurité): audit quotidien réussi du $(date -u +%F)"
+          git pull --rebase origin main
+          git push origin HEAD:main

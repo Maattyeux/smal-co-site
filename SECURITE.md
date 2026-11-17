@@ -19,7 +19,7 @@ Ce dépôt est public : n'y mettez jamais de mot de passe, de clé ni de jeton.
 - Conservation annoncée : 3 ans au plus après le dernier échange (page Confidentialité).
 
 ## Contrôles automatiques
-- **Sécurité quotidienne** (`.github/workflows/securite.yml`, chaque jour à 7 h) : lance `.github/scripts/check-securite.mjs` sur le site en ligne (en-têtes, scripts des pages, fichiers de code identiques au dépôt, formulaire, `security.txt`, note Mozilla Observatory A+). Son état est affiché par le badge du pied de page. En cas d'anomalie, GitHub envoie un e-mail au propriétaire du dépôt. Lancement manuel : onglet Actions → « Sécurité quotidienne » → Run workflow.
+- **Sécurité quotidienne** (`.github/workflows/securite.yml`, chaque jour à 7 h) : recherche de secrets dans tout l'historique (gitleaks), analyse statique du code (Semgrep), puis `.github/scripts/check-securite.mjs` sur le site en ligne (en-têtes, scripts des pages, fichiers de code identiques au dépôt, formulaire, `security.txt`, note Mozilla Observatory A+). Si tout réussit, le workflow commite `security-status.json`, lu par la vignette sécurité du pied de page (date du dernier audit, protections actives ; « audit en retard » après 48 h sans réussite). En cas d'anomalie, GitHub envoie un e-mail au propriétaire du dépôt. Lancement manuel : onglet Actions → « Sécurité quotidienne » → Run workflow.
 - **Sécurité CI** (`.github/workflows/security.yml`, à chaque push / PR vers main et chaque lundi) : gitleaks, npm audit (si `package.json`), en-têtes de prod ; scan OWASP ZAP baseline le lundi et en manuel.
 - **Dependabot** (`.github/dependabot.yml`) : mises à jour hebdomadaires des actions GitHub.
 

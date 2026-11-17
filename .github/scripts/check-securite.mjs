@@ -2,7 +2,7 @@
 // Compare le site servi par Netlify au dépôt : en-têtes, scripts présents dans les pages, fichiers de code,
 // formulaire de contact. Toute anomalie fait échouer le contrôle, et GitHub envoie alors un e-mail.
 // Usage local : node .github/scripts/check-securite.mjs   (SITE=https://... pour viser une autre adresse)
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 
 const SITE = (process.env.SITE || 'https://smal-co-web.netlify.app').replace(/\/$/, '');
@@ -89,14 +89,35 @@ if (process.env.NETLIFY_AUTH_TOKEN) {
 } else notes.push('Contrôle Netlify ignoré (secret NETLIFY_AUTH_TOKEN non défini)');
 
 // --- 7. Note Mozilla Observatory : doit rester A+ (injoignable = simple note, pour éviter les fausses alertes)
+let grade = null;
 try {
   const obs = await fetch('https://observatory-api.mdn.mozilla.net/api/v2/scan?host=' + new URL(SITE).host, { method: 'POST' }).then((r) => r.json());
   if (obs.error || !obs.grade) notes.push(`Mozilla Observatory : pas de note (${obs.error || 'réponse vide'})`);
   else if (obs.grade !== 'A+') fail(`Mozilla Observatory : note ${obs.grade} (attendu A+), détails : ${obs.details_url}`);
-  else notes.push(`Mozilla Observatory : ${obs.grade} (${obs.score}, ${obs.tests_passed}/${obs.tests_quantity} tests réussis)`);
+  else { grade = obs.grade; notes.push(`Mozilla Observatory : ${obs.grade} (${obs.score}, ${obs.tests_passed}/${obs.tests_quantity} tests réussis)`); }
 } catch (e) { notes.push('Mozilla Observatory injoignable : ' + e.message); }
 
 console.log(`Site contrôlé : ${SITE}`);
 notes.forEach((n) => console.log('ℹ ' + n));
 if (problems.length) { problems.forEach((p) => console.log('✗ ' + p)); console.log(`\n${problems.length} anomalie(s).`); process.exit(1); }
 console.log('✓ Aucune anomalie.');
+
+// --- 8. Contrôle réussi : état publié pour la vignette du pied de page (le workflow le commite ensuite)
+// Chaque bouclier correspond à un contrôle ci-dessus ou à un job du workflow (gitleaks, Semgrep).
+let prev = {};
+try { prev = JSON.parse(readFileSync('security-status.json', 'utf8')); } catch {}
+writeFileSync('security-status.json', JSON.stringify({
+  lastCheck: new Date().toISOString(),
+  status: 'verified',
+  headersGrade: grade || prev.headersGrade || null, // Observatory parfois injoignable : on garde la dernière note obtenue
+  shields: [
+    'Chiffrement HTTPS imposé (HSTS 2 ans)',
+    'Politique de sécurité du contenu (CSP) stricte',
+    'Protection anti-clickjacking',
+    'Fichiers en ligne identiques au code vérifié',
+    'Aucun secret exposé dans le code (Gitleaks)',
+    'Analyse statique du code (Semgrep)',
+    'Formulaire protégé : validation stricte et anti-robot',
+    'Zéro tracker, zéro cookie publicitaire',
+  ],
+}, null, 2) + '\n');

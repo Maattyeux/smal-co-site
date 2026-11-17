@@ -1,0 +1,15 @@
+{
+  "lastCheck": null,
+  "status": "pending",
+  "headersGrade": null,
+  "shields": [
+    "Chiffrement HTTPS imposé (HSTS 2 ans)",
+    "Politique de sécurité du contenu (CSP) stricte",
+    "Protection anti-clickjacking",
+    "Fichiers en ligne identiques au code vérifié",
+    "Aucun secret exposé dans le code (Gitleaks)",
+    "Analyse statique du code (Semgrep)",
+    "Formulaire protégé : validation stricte et anti-robot",
+    "Zéro tracker, zéro cookie publicitaire"
+  ]
+}

@@ -762,7 +762,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .hero-slogan{background:none;color:#fff}
 .hero-mark img{filter:none}
 .h-lg::after,.missions-title::after,.section-title::after{content:"";display:block;width:40px;height:2px;margin-top:.6em;background:var(--accent)}
-:is(.event-center,.vision-objectifs,.merci,.partners-header) :is(.h-lg,.missions-title,.section-title)::after{margin-inline:auto}
+:is(.event-center,.vision-objectifs,.merci,.partners-header,.soon-card) :is(.h-lg,.missions-title,.section-title)::after{margin-inline:auto}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.22em;color:var(--muted)}
 .eyebrow::before{content:"";width:8px;height:8px;background:var(--accent);flex:none}
 /* Boutons : blanc plein (principal) ou contour blanc (secondaire) ; l'accent n'apparaît qu'au survol */
@@ -1113,3 +1113,21 @@ h1,h2,h3,h4,.hero-title,.showcase-label,.story .step-txt time{font-family:var(--
 @media (max-width:560px){.contrib-card{flex-direction:column;align-items:flex-start;gap:14px}}
 .contrib .p-links{padding-top:12px}
 .contrib .p-links a{margin:0;padding:10px 16px;color:#fff;font-size:13px;gap:8px}
+
+/* THE SMAL TIMES : fond paysage LINKMAILSMAL (vue sur l'eau à gauche, groupe sur les rochers à droite) + encart « en préparation » */
+.backdrop-linkmail .backdrop-img{object-position:center 60%}
+@media (max-aspect-ratio:1/1){.backdrop-linkmail .backdrop-img{object-position:68% center}} /* écrans verticaux : on garde le groupe */
+.soon-card{position:relative;overflow:hidden;max-width:760px;margin-inline:auto;padding:clamp(36px,6vw,64px);text-align:center;border:1px solid rgba(255,255,255,.1);background:rgba(18,19,24,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--lift),inset 0 1px 0 rgba(255,255,255,.06)}
+.soon-card .lead{margin:20px auto 0;color:#d4d4dc}
+.soon-anim{display:flex;align-items:center;justify-content:center;gap:32px;margin:0 auto 28px;padding-left:min(120px,22vw);color:#b06cff} /* padding : compense la traînée qui déborde à gauche */
+.soon-anim .soon-rider{position:relative;left:auto;bottom:auto;width:min(220px,46vw);margin:0;animation:none} /* cycliste de contact.html, sur place au lieu de traverser */
+.soon-anim .success-bike{width:100%;height:auto}
+.soon-anim .success-trail{animation:soon-trail 1.2s ease-in-out infinite alternate}
+.soon-clock{flex:none;width:min(58px,12vw);height:auto;overflow:visible;filter:drop-shadow(0 0 12px rgba(139,36,214,.8))} /* même trait et halo que .success-bike */
+.soon-clock-sec,.soon-clock-min{transform-box:fill-box;transform-origin:50% 100%}
+.soon-clock-sec{animation:spin 4s linear infinite}
+.soon-clock-min{animation:spin 48s linear infinite}
+.soon-socials-t{margin-top:clamp(28px,4vw,40px);color:var(--muted);font-size:16px}
+.soon-socials{justify-content:center;margin-top:16px}
+@keyframes soon-trail{from{opacity:.55;transform:scaleX(.7)}to{opacity:1;transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.soon-anim .success-trail,.soon-clock-sec,.soon-clock-min{animation:none}}
